@@ -1,54 +1,30 @@
 # Introdução
 
-Imagine que você deseja apresentar este projeto para investidores que deverão decidir se investem ou não no desenvolvimento da sua ferramenta.
+A evolução dos sistemas de informação tem permitido a elaboração de aplicações web que atendem a distintos interesses, entre eles o da organização financeira. Esta pode migrar de simples planilhas e registros manuais para plataformas de gestão financeira pessoal que, entre outras funcionalidades, viabilizam a análise comportamental, a orçamentação e as projeções financeiras. 
 
-A **Introdução** consiste das etapas: *Contextualização -- Definição do problema -- Definição dos Objetivos -- Justificativa*, e tem como função situar o seu trabalho dentro de um contexto de mercado e mostrar a importância da sua proposta para resolver a dor de um usuário.
-
-A Contextualização deve situar sem projeto em um determinado contexto de mercado, a fim de fornecer informações adicionais que possam ajudar a entender melhor o assunto que você irá abordar. Serve também para definir a relevância do seu assunto, uma vez que mostra o tamanho do mercado em que se está inserido. Ela pode envolver a análise de vários aspectos, como o ambiente histórico, cultural, político e social em que o problema a ser atacado surgiu.
-
-Escreva de 2 a 3 parágrafos para contetualizar o seu projeto.
+O uso de aplicações web de gestão financeira pessoal agrega valor à administração das finanças, colaborando para tomadas de decisão mais assertivas e para o bem-estar financeiro dos usuários (CHHILLAR; ARORA, 2022). A implementação dessas aplicações já possui um arcabouço técnico e normativo consolidado no mercado, com amplas possibilidades de expansão em diversos níveis sociais e culturais.
 
 ## Problema
 
-Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, **não** é a hora de comentar sobre a solução/aplicação.
-
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+Pessoas físicas, incluindo jovens adultos e famílias de variados níveis sociais, ainda carecem de educação financeira de alto nível, o que permitiria uma melhor gestão das finanças para a realização de metas pessoais. Ao mesmo tempo, o custo de aplicações mais robustas acaba por elitizar o acesso a ferramentas de gestão elaborada, criando barreiras à inclusão financeira plena (POTRICH; VIEIRA; KIRCH, 2015).
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo deste trabalho é desenvolver a proposta de um aplicativo de organização financeira pessoal que permita ao usuário registrar e acompanhar suas receitas e despesas.
+O sistema tem como finalidade ajudar o usuário a visualizar seu saldo financeiro, controlar seus gastos e compreender melhor seus hábitos de consumo. A aplicação proposta busca oferecer uma interface simples e intuitiva, permitindo que o usuário registre informações financeiras de maneira prática.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+A organização financeira pessoal é um desafio para grande parte da população brasileira. Muitas pessoas enfrentam dificuldades para controlar gastos, planejar despesas e administrar dívidas, o que pode resolver o endividamento e à independência. Nesse contexto, o desenvolvimento de soluções tecnológicas que auxiliem no controle financeiro torna-se cada vez mais relevante.
 
-Lembre-se de pesquisar e utilizar números que justifiquem por que é importante que tal problema seja resolvido ou que mostrem o impacto do problema na vida das pessoas.
+De acordo com dados do Serviço de Proteção ao Crédito (SPC Brasil ) e da Confederação Nacional de Dirigentes Lojistas (CNDL), mais de 68 milhões de brasileiros estavam inadimplentes em 2025 representando cerca de 41% da população adulta do país. Esse cenário demonstra a dificuldade de grande parte da população em administrar suas finanças e manter o equilíbrio entre renda e despesas. Diante desse cenário, sugerimos a desenvolver um aplicativo de organização financeira que permita aos usuários registrar seus gastos,controlar seu orçamento e visualizar melhor sua situação financeira. A proposta do aplicativo é auxiliar as pessoas a desenvolver hábitos mais saudáveis,promovendo maior controle sobre o dinheiro e contribuindo para redução do endividamento.   
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
 
 ## Público-Alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações hierárquicas, etc.
+Além de educação financeira, faz-se necessária uma visibilidade clara da gestão monetária para à tomada de decisões na vida dos cidadãos brasileiros. Conforme SOUSA (2023, p.59), “o nível de educação financeira influencia na qualidade das tomadas de decisão dos integrantes da geração Millennials e Z, mas outros fatores podem estar envolvidos nesse processo”.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+Portanto, caracterizados por alto conhecimento tecnológico e preferência por serviços digitais, definem-se indivíduos da geração Z e millennials, dos 18 aos 40 anos, como público-alvo desse recurso. O foco consiste em cidadãos de situações trabalhistas diversas como desempregados, bolsistas, estagiários, funcionários públicos, profissionais autônomos e CLTs que buscam substituir a utilização de métodos de controle manuais por ferramentas automatizadas, visando maior autonomia sobre sua vida financeira.
+Estes usuários encontram-se em momentos de necessidade de organização financeira, como a entrada no mercado de trabalho, a gestão de recursos para metas (como a compra de imóveis e veículos), a administração de múltiplas fontes de renda e o gerenciamento monetário familiar. Nesses cenários, a agilidade e a visibilidade de dados são cruciais para o planejamento e a manutenção da saúde econômica.
 
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
