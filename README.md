@@ -14,6 +14,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Caio Milagres de Oliveira
 * Lucca Ferreira Langkammer
 * Luiz Felipe Fernandes Iranço Costa
+* Raul Fernando Polisseni Graça
 * vanessa Rodrigues Passos
 
 
