@@ -1,44 +1,27 @@
 # Especificações do Projeto
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+A seção apresenta a definição do problema sob a perspectiva do usuário, abordando dificuldades no controle financeiro e propondo uma solução prática e acessível. São utilizadas técnicas como definição de personas, histórias de usuário e levantamento de requisitos funcionais e não funcionais. Também são consideradas as restrições do projeto para garantir viabilidade e foco na implementação.## Personas
 
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto.
-
-Caso deseje atribuir uma imagem a sua persona, utilize o site https://thispersondoesnotexist.com/
-
-## Personas
-
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
-
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
-
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+| Campo | Descrição |
+| :--- | :--- |
+| **Descrição:** | O usuário busca uma organização financeira e pode estar dentro de um dos três perfis financeiros: O que poupa, o que gasta toda a sua renda e o que se endivida. |
+| **Necessidades:** | 1. Ferramentas de planejamento financeiro para visualizar entradas e saídas; <br> 2. Alertas de gastos excessivos e metas de poupança; <br> 3. Sugestões de investimentos simples e acessíveis; <br> 4. Interface prática e rápida, já que o tempo é escasso; <br> 5. Recursos para organizar e acompanhar metas de poupança; <br> 6. Controle rigoroso de despesas com categorização automática; <br> 7. Metas mensais para ajudar na organização financeira e na motivação. |
 
 ## Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+| Eu como... [QUEM] | ... quero/desejo ... [O QUE] | ... para .... [PORQUE] |
+| :--- | :--- | :--- |
+| Usuário | Ter metas de poupança. | Conseguir transformar parte da renda em patrimônio e não terminar o mês sem saldo. |
+| Usuário | Acessar relatórios claros sobre os gastos. | Identificar gastos desnecessários. |
+| Usuário | Organizar minhas metas de poupança. | Planejar minha independência financeira e construir reservas. |
+| Usuário | Aprender sobre investimentos de forma simples. | Começar a investir com segurança e aumentar meu patrimônio. |
+| Usuário | Controlar despesas. | Entender para onde vai meu dinheiro e reduzir gastos. |
+| Usuário | Ter um plano de acompanhamento de dívidas. | Montar estratégias para amenizar as dívidas. |
+| Usuário | Receber alertas de limite de gastos. | Evitar que o saldo fique negativo. |
 
 Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
 ## Requisitos
 
@@ -46,33 +29,30 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade | 
-|------|-----------------------------------------|----| 
-|RF-001| A aplicação deve permitir que o usuário gerencie suas tarefas | ALTA |  
-|RF-002| A aplicação deve permitir a emissão de um relatório de tarefas realizadas no mês   | MÉDIA | 
+
+| ID | Descrição | Prioridade |
+| :--- | :--- | :--- |
+| RF- 01 | A aplicação deve permitir que o usuário crie uma conta | ALTA |
+| RF- 02 | A aplicação deve permitir ao usuário fazer login em sua conta. | ALTA |
+| RF- 03 | A aplicação deve permitir que o usuário cadastre as suas receitas financeiras | ALTA |
+| RF- 04 | A aplicação deve permitir que o usuário cadastre as suas despesas | ALTA |
+| RF- 05 | A aplicação deve permitir que o usuário categorize as receitas/despesas. | ALTA |
+| RF -06 | A aplicação deve exibir gráficos para o usuário visualizar as movimentações por categorias. | MÉDIA |
+| RF -07 | A aplicação deve permitir que o usuário insira metas de gastos | MÉDIA |
+| RF-08 | A aplicação deve fazer recomendações e sugestões de controle financeiro para o usuário | BAIXA |
+| RF-09 | A aplicação deve gerar alertas para o usuário em caso de gastos acima da meta definida | BAIXA |
 
 
 ### Requisitos não Funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| A aplicação deve ser responsiva | MÉDIA | 
-|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+| ID | Descrição | Prioridade |
+| :--- | :--- | :--- |
+| RNF-01 | A aplicação deve ser compatível com dispositivo mobile e desktops | ALTA |
+| RNF- 02 | A aplicação deve garantir a segurança e a confidencialidade dos dados econômicos dos usuários, prevenindo qualquer vazamento de informações | ALTA |
+| RNF-03 | A aplicação deve possuir símbolos para categorização dos itens | BAIXA |
+| RNF-04 | A aplicação deve apresentar uma interface visualmente organizada e intuitiva, proporcionando facilidade de utilização | MÉDIA |
+| RNF-05 | A aplicação deve carregar suas telas em até 03 segundos | MÉDIA |
+| RNF-06 | A aplicação deverá funcionar a todo momento | ALTA |
 
 ## Restrições
 
