@@ -1,6 +1,8 @@
 # Especificações do Projeto
 
-A seção apresenta a definição do problema sob a perspectiva do usuário, abordando dificuldades no controle financeiro e propondo uma solução prática e acessível. São utilizadas técnicas como definição de personas, histórias de usuário e levantamento de requisitos funcionais e não funcionais. Também são consideradas as restrições do projeto para garantir viabilidade e foco na implementação.## Personas
+A seção apresenta a definição do problema sob a perspectiva do usuário, abordando dificuldades no controle financeiro e propondo uma solução prática e acessível. São utilizadas técnicas como definição de personas, histórias de usuário e levantamento de requisitos funcionais e não funcionais. Também são consideradas as restrições do projeto para garantir viabilidade e foco na implementação.
+
+## Personas
 
 | Campo | Descrição |
 | :--- | :--- |
