@@ -15,7 +15,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Lucca Ferreira Langkammer
 * Luiz Felipe Fernandes Iranço Costa
 * Raul Fernando Polisseni Graça
-* vanessa Rodrigues Passos
+* Vanessa Rodrigues Passos
 
 
 ## Orientador
