@@ -27,7 +27,16 @@ A tela inicial apresenta um menu lateral com as principais seções do portal, e
 
 ![Exemplo de Wireframe](img/wireframe-example.png)
 
- 
+
+### Login e Cadastro
+
+Nesta tela, são apresentados os requisitos funcionais RF-01 (Cadastro) e RF-02 (Login), permitindo que o usuário acesse sua conta existente ou crie uma nova de forma rápida. A navegação entre as seções é feita por meio de uma transição fluida, onde o formulário de login solicita e-mail e senha, enquanto a seção de cadastro inclui campos para nome completo e confirmação de senha. Toda a interface foi projetada com ícones intuitivos e botões de ação destacados em verde esmeralda, assegurando a conformidade com o requisito de interface prática e responsiva.
+
+![Login](img/login.png)
+
+![Login](img/cadastro.png)
+
+
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
 > - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
