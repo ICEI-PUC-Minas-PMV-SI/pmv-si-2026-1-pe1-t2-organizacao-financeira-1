@@ -34,7 +34,7 @@ Nesta tela, são apresentados os requisitos funcionais RF-01 (Cadastro) e RF-02 
 
 ![Login](img/login.png)
 
-![Login](img/cadastro.png)
+![Cadastro](img/cadastro.png)
 
 
 > **Links Úteis**:
