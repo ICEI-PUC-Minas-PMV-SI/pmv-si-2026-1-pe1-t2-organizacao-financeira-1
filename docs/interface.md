@@ -37,6 +37,17 @@ Nesta tela, são apresentados os requisitos funcionais RF-01 (Cadastro) e RF-02 
 ![Cadastro](img/cadastro.png)
 
 
+### Tela Pricipal (Dashboard)
+
+
+Esta tela principal é o centro de controle financeiro do usuário. O design em dark mode adota uma hierarquia visual clara, usando a cor verde para destacar dados críticos e ações.
+* Minhas Finanças: Mostra o saldo atual e um snapshot rápido de receitas e despesas totais.
+* Metas: Usa barras de progresso horizontais e ícones para rastrear objetivos de longo prazo (ex: viagem, casa) de forma motivadora.
+* Gráfico de Despesas: Analisa gastos por categoria (ex: moradia, transporte) usando barras empilhadas e filtros de tempo (últimos 3/6 meses).
+* Fluxo de Caixa: Exibe a tendência anual de receitas vs despesas em um gráfico de área.
+* Ações Rápidas: Botões proeminentes na parte inferior para adicionar novas transações instantaneamente.
+
+  ![tela principal](imagem-tela-principal.jpeg)
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
 > - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
