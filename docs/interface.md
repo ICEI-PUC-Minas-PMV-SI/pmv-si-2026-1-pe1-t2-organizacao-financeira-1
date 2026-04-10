@@ -47,7 +47,7 @@ Esta tela principal é o centro de controle financeiro do usuário. O design em 
 * Fluxo de Caixa: Exibe a tendência anual de receitas vs despesas em um gráfico de área.
 * Ações Rápidas: Botões proeminentes na parte inferior para adicionar novas transações instantaneamente.
 
-  ![tela principal](img/imagem-tela-principal.jpeg)
+ ![Tela principal](img/tela-principal.jpeg)
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
 > - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
