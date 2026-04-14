@@ -59,5 +59,4 @@ O sistema exibe um resumo consolidado da situação financeira: Na seção de in
 
 A tela de Configurações do FinApp é dividida em quatro partes principais para facilitar o uso. No topo, há uma área para editar o perfil do usuário (nome e e-mail) e um painel de personalização para ativar o modo escuro, sons e notificações. Na parte de baixo, o usuário consegue gerenciar tags e categorias, permitindo criar ou excluir nomes como "Alimentação", "Lazer" e "Investimentos" para organizar melhor suas contas.
 
-![Configurações](<img width="1920" height="1080" alt="Desktop" src="https://github.com/user-attachments/assets/26e64f5f-bc05-4a5c-a58d-429f33de7749" />
-)
+
