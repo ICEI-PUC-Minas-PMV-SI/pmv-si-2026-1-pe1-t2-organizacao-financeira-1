@@ -60,3 +60,15 @@ O sistema exibe um resumo consolidado da situação financeira: Na seção de in
 A tela de Configurações do FinApp é dividida em quatro partes principais para facilitar o uso. No topo, há uma área para editar o perfil do usuário (nome e e-mail) e um painel de personalização para ativar o modo escuro, sons e notificações. Na parte de baixo, o usuário consegue gerenciar tags e categorias, permitindo criar ou excluir nomes como "Alimentação", "Lazer" e "Investimentos" para organizar melhor suas contas.
 
 ![Configuraço~es](img/Configurações.png)
+
+
+### Tela de Calculadoras
+
+A tela de calculadoras oferece ao usuário a possibilidade de realizar simulações financeiras de forma prática e intuitiva. Nela, é possível:
+* Simular investimentos em renda fixa, utilizando cálculos de juros compostos para visualizar projeções de crescimento ao longo do tempo.
+* Planejar a reserva de emergência, testando diferentes cenários e valores para compreender possíveis resultados e estratégias de segurança financeira.
+Os dados necessários para cada simulação são inseridos por meio de modais, e os resultados são exibidos diretamente na tela, permitindo ao usuário analisar e comparar diferentes situações de forma clara e objetiva.
+
+![Reserva de Emergencia](img/ReservaEmergencia.png)
+
+![Juros Compostos](img/jurosComposto.png)
