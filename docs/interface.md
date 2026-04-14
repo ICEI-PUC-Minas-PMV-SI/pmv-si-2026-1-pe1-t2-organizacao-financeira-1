@@ -1,8 +1,5 @@
 
-![WhatsApp Image 2026-04-07 at 12 19 29](https://github.com/user-attachments/assets/e797184a-bde9-4a8b-8e89-8df2f7b81d67)
 
-
-![organizacaoFinanceira_UF](https://github.com/user-attachments/assets/bac35bf2-97dc-4a80-bc7b-00be6782c5c3)
 
 # Projeto de Interface
 
@@ -12,25 +9,11 @@ Visão geral da interação do usuário pelas telas do sistema e protótipo inte
 
 ## User Flow
 
-![Exemplo de UserFlow](img/userflow.jpg)
-
-Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor mapear todo fluxo de telas do site ou app. Essa técnica funciona para alinhar os caminhos e as possíveis ações que o usuário pode fazer junto com os membros de sua equipe.
-
-> **Links Úteis**:
-> - [User Flow: O Quê É e Como Fazer?](https://medium.com/7bits/fluxo-de-usu%C3%A1rio-user-flow-o-que-%C3%A9-como-fazer-79d965872534)
-> - [User Flow vs Site Maps](http://designr.com.br/sitemap-e-user-flow-quais-as-diferencas-e-quando-usar-cada-um/)
-> - [Top 25 User Flow Tools & Templates for Smooth](https://www.mockplus.com/blog/post/user-flow-tools)
-
+![WhatsApp Image 2026-04-07 at 12 19 29](https://github.com/user-attachments/assets/e797184a-bde9-4a8b-8e89-8df2f7b81d67)
 
 ## Wireframes
 
-São protótipos usados em design de interface para sugerir a estrutura de um site web e seu relacionamentos entre suas páginas. Um wireframe web é uma ilustração semelhante do layout de elementos fundamentais na interface e é fundamental sempre relacionar cada wireframe com o(s) requisito(s) que ele atende.
-
-### Exemplo
-
-A tela inicial apresenta um menu lateral com as principais seções do portal, enquanto a navigation bar, ao topo, apresenta informações de envio de imagens ou navegação pela galeria de fotos. A área central apresenta a galeria de fotos na forma de uma grade. Nesta tela, são apresentados os seguintes requisitos
-
-![Exemplo de Wireframe](img/wireframe-example.png)
+![organizacaoFinanceira_UF](https://github.com/user-attachments/assets/bac35bf2-97dc-4a80-bc7b-00be6782c5c3)
 
 
 ### Login e Cadastro
