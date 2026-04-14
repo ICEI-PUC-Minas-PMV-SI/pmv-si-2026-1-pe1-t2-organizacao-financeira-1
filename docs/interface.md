@@ -57,10 +57,8 @@ Esta tela principal é o centro de controle financeiro do usuário. O design em 
 
 ### Sugestões e Dicas
 
-A tela apresenta o módulo de Investimentos do sistema, focado em oferecer recomendações personalizadas de controle financeiro e otimização de investimentos com base no perfil e nos dados do usuário. O sistema exibe um resumo consolidado da situação financeira.
-Na seção de insights, o sistema analisa os hábitos financeiros (gastos, aportes e metas) e gera orientações práticas.
-A tela também apresenta uma projeção de crescimento patrimonial, comparando dois cenários: manter a estratégia atual ou seguir as recomendações. O gráfico evidencia que, ao aplicar as sugestões, o crescimento tende a ser significativamente maior ao longo dos próximos anos.
-Por fim, há uma análise de rebalanceamento de carteira, que compara a alocação atual dos investimentos com uma alocação sugerida. Observa-se uma recomendação de ajuste na distribuição entre renda fixa, ações, fundos imobiliários e ativos internacionais, buscando maior diversificação e melhor equilíbrio entre risco e retorno.
+A tela apresenta o módulo de Investimentos do sistema, focado em oferecer recomendações personalizadas de controle financeiro e otimização de investimentos com base no perfil e nos dados do usuário.\
+O sistema exibe um resumo consolidado da situação financeira: Na seção de insights, o sistema analisa os hábitos financeiros (gastos, aportes e metas) e gera orientações práticas. A tela também apresenta uma projeção de crescimento patrimonial, comparando dois cenários: manter a estratégia atual ou seguir as recomendações. O gráfico evidencia que, ao aplicar as sugestões, o crescimento tende a ser significativamente maior ao longo dos próximos anos. Por fim, há uma análise de rebalanceamento de carteira, que compara a alocação atual dos investimentos com uma alocação sugerida. Observa-se uma recomendação de ajuste na distribuição entre renda fixa, ações, fundos imobiliários e ativos internacionais, buscando maior diversificação e melhor equilíbrio entre risco e retorno.
 
 ![Sugestões e Dicas](img/suggestions-tips.png)
 
