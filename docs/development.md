@@ -32,11 +32,13 @@ As tabelas que se seguem apresentam os requisitos funcionais e não-funcionais q
 
 ## Descrição das estruturas:
 
-## Notícia
-|  **Nome**      | **Tipo**          | **Descrição**                             | **Exemplo**                                    |
-|:--------------:|-------------------|-------------------------------------------|------------------------------------------------|
-| Id             | Numero (Inteiro)  | Identificador único da notícia            | 1                                              |
-| Título         | Texto             | Título da notícia                         | Sistemas de Informação PUC Minas é o melhor                                   |
-| Conteúdo       | Texto             | Conteúdo da notícia                       | Sistemas de Informação da PUC Minas é eleito o melhor curso do Brasil                            |
-| Id do usuário  | Numero (Inteiro)  | Identificador do usuário autor da notícia | 1                                              |
+### Login
 
+| Nome             | Tipo              | Descrição                                      | Exemplo             |
+|------------------|-------------------|-----------------------------------------------|---------------------|
+| Email            | Texto             | Endereço de e-mail do usuário                 | usuario@email.com   |
+| Senha            | Texto             | Senha digitada pelo usuário                   | ****            |
+| Lembrar Login    | Booleano          | Indica se o usuário quer permanecer logado    | true / false        |
+| Token de Acesso  | Texto (JWT)       | Token gerado após autenticação                | eyJhbGciOiJIUzI1... |
+| Data de Login    | Data/Hora         | Data e hora do login                          | 2026-05-11 19:30    |
+| Status Login     | Texto             | Resultado do login                            | Sucesso / Erro      |
