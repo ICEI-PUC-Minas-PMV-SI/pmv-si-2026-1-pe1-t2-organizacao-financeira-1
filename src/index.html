@@ -1,50 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinApp - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
-    <div>
-        <h1>FinApp</h1>
-        <p>Gerencie suas finanças hoje.</p>
-    </div>
+    <div class="wrap">
 
-    <div>
-        <h2>Login</h2>
-
-        <form>
-            <div>
-                <label for="email">Email</label><br>
-                <input type="email" id="email" name="email" placeholder="exemplo@email.com">
+        <div class="info">
+            <div class="wallet">
+                <i class="fas fa-wallet"></i>
             </div>
+            <h1>Fin<span>App</span></h1>
+            <p>Gerencie suas finanças hoje.</p>
+        </div>
 
-            <br>
+        <div class="card">
+            <h2>Login</h2>
 
-            <div>
-                <label for="senha">Senha</label><br>
-                <input type="password" id="senha" name="senha" placeholder="****">
+            <form>
+
+                <div class="area">
+                    <label for="e-mail">E-mail:</label>
+                    <div class="envelope">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="e-mail" name="e-mail" placeholder="exemplo@email.com">
+                    </div>
+                </div>
+
+                <div class="area">
+                    <label for="senha">Senha:</label>
+                    <div class="lock">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="senha" name="senha" placeholder="**********">
+                    </div>
+                </div>
+
+                <div class="forgot">
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+
+                <button class="btn" type="submit">
+                    Entrar no App
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </form>
+
+            <div class="divider"></div>
+
+            <div class="register">
+                <p>Ainda não tem conta?<a href="#">Cadastre-se</a></p>
             </div>
-
-            <br>
-
-            <div>
-                <a href="#">Esqueceu a senha?</a>
-            </div>
-
-            <br>
-
-            <button type="submit">Entrar no App</button>
-        </form>
-
-        <br>
-
-        <div>
-            <p>Ainda não tem conta? <a href="#">Cadastre-se</a></p>
         </div>
     </div>
 
 </body>
+
 </html>
