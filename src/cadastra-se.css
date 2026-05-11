@@ -1,0 +1,172 @@
+<style>
+    /* 1. RESET & FUNDAMENTOS */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        padding: 20px;
+    }
+
+    /* 2. WRAPPER & LAYOUT */
+    .wrap {
+        width: 100%;
+        max-width: 450px;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .info {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .info h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        font-weight: 800;
+    }
+
+    .info h1 span {
+        color: #2CACE6;
+    }
+
+    .wallet {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #666;
+        margin-bottom: 0.5rem;
+    }
+
+    /* 3. O CARD DE CADASTRO */
+    .card {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    /* 4. FORMULÁRIO & INPUTS */
+    .area {
+        margin-bottom: 1.2rem;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #555;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e1e8ef;
+        border-radius: 10px;
+        outline: none;
+        transition: all 0.3s ease;
+        background-color: #f8fafc;
+        font-size: 1rem;
+    }
+
+    input:focus {
+        border-color: #2CACE6;
+        background-color: #fff;
+        box-shadow: 0 0 0 4px rgba(44, 172, 230, 0.1);
+    }
+
+    /* 5. BOTÃO */
+    .btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #2CACE6;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.3s;
+        margin-top: 1rem;
+    }
+
+    .btn:hover {
+        background-color: #1a9bd4;
+        transform: translateY(-2px);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    /* 6. FEEDBACKS & DIVISORES */
+    .divider {
+        height: 1px;
+        background: #eee;
+        margin: 1.5rem 0;
+    }
+
+    .register {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .register a {
+        color: #2CACE6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .register a:hover {
+        text-decoration: underline;
+    }
+
+    #mensagemErro, #mensagemErroSenha {
+        font-size: 0.8rem;
+        margin-top: 5px;
+        font-weight: 500;
+        animation: shake 0.4s ease-in-out;
+    }
+
+    /* 7. ANIMAÇÕES (Performance via GPU) */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+
+    /* 8. RESPONSIVIDADE */
+    @media (max-width: 480px) {
+        .card {
+            padding: 1.5rem;
+        }
+        .info h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
