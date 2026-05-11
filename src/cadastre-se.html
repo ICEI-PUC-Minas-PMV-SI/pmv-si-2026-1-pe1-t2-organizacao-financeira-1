@@ -20,11 +20,11 @@
 
             <h1>Fin<span>App</span></h1>
 
-            <p>Crie sua conta.</p>
+            <p onclick="mostrarCadastro()" style="cursor: pointer; color: #2CACE6;">Crie sua conta.</p>
 
         </div>
 
-        <div class="card">
+        <div class="card" id="cadastroCard" style="display: none;">
 
             <h2>Cadastro</h2>
 
@@ -104,9 +104,13 @@
 
                     </div>
 
+                    <p id="mensagemErroSenha" style="color: red; display: none;">As senhas são diferentes.</p>
+
                 </div>
 
-                <button class="btn" type="submit">
+                <p id="mensagemErro" style="color: red; display: none;">Por favor, preencha todos os campos obrigatórios.</p>
+
+                <button class="btn" type="button" onclick="salvarCadastro()">
                     Finalizar Cadastro
                 </button>
 
@@ -128,7 +132,54 @@
         </div>
 
     </div>
+    <script>
+        function mostrarCadastro() {
+            document.getElementById("cadastroCard").style.display = "block";
+        }
 
+        function salvarCadastro() {
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+            const confirmarSenhaInput = document.getElementById('confirmarSenha');
+
+            const erroCampos = document.getElementById('mensagemErro');
+            const erroSenha = document.getElementById('mensagemErroSenha');
+
+            erroCampos.style.display = "none";
+            erroSenha.style.display = "none";
+
+            const nome = nomeInput.value;
+            const email = emailInput.value;
+            const senha = senhaInput.value;
+            const confirmarSenha = confirmarSenhaInput.value;
+
+            if (nome === "" || email === "" || senha === "") {
+                erroCampos.style.display = "block";
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                erroSenha.style.display = "block";
+                return;
+            }
+
+            const usuario = {
+                nome: nome,
+                email: email,
+                senha: senha
+            };
+
+            localStorage.setItem(email, JSON.stringify(usuario));
+
+            alert("Cadastro realizado com sucesso!");
+
+            nomeInput.value = "";
+            emailInput.value = "";
+            senhaInput.value = "";
+            confirmarSenhaInput.value = "";
+        }
+    </script>
 </body>
 
 </html>
