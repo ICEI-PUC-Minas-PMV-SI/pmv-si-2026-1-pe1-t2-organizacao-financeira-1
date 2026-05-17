@@ -5,12 +5,240 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinFlow – Novo Lançamento</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #30363d;
+      --muted:     #8b949e;
+      --text:      #e6edf3;
+      --green:     #00c985;
+      --green-dim: #00c98522;
+      --red:       #ff5c5c;
+      --red-dim:   #ff5c5c22;
+      --yellow:    #f5c542;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    /* ── noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .wrapper {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 420px;
+      animation: fadeUp .5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── logo ── */
+    .logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .logo-icon svg { fill: var(--green); width: 22px; }
+    .logo h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 26px; font-weight: 700; letter-spacing: -1px;
+    }
+    .logo h1 span { color: var(--green); }
+    .logo p { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+    /* ── card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+    }
+
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .card-title {
+      font-size: 18px; font-weight: 800;
+    }
+
+    /* type toggle */
+    .type-toggle {
+      display: flex; gap: 6px;
+    }
+    .type-btn {
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 11px; font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .type-btn:hover { color: var(--text); border-color: var(--muted); }
+    .type-btn.active-receita { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+    .type-btn.active-saida   { background: var(--red-dim);   border-color: var(--red);   color: var(--red); }
+
+    /* ── form ── */
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 7px;
+    }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .input-wrap {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .input-wrap:focus-within {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px var(--green-dim);
+    }
+    .input-wrap.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px var(--red-dim);
+    }
+    .input-wrap svg { fill: var(--muted); width: 15px; flex-shrink: 0; }
+    .input-wrap input, .input-wrap select {
+      background: transparent; border: none; outline: none;
+      color: var(--text); font-size: 13px;
+      font-family: 'Space Mono', monospace;
+      width: 100%;
+    }
+    .input-wrap select option { background: var(--surface); }
+    .input-wrap input::placeholder { color: #484f58; }
+
+    /* amount highlight */
+    #valor { font-size: 15px; font-weight: 700; }
+    #valor.receita { color: var(--green); }
+    #valor.saida   { color: var(--red); }
+
+    .err-msg {
+      font-size: 10px; color: var(--red);
+      margin-top: 5px; display: none;
+      font-family: 'Space Mono', monospace;
+    }
+    .err-msg.show { display: block; }
+
+    /* categoria chips */
+    .chips {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+    }
+    .chip {
+      padding: 4px 12px; border-radius: 20px;
+      font-size: 10px; font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer;
+      transition: all .15s;
+    }
+    .chip:hover { border-color: var(--green); color: var(--green); }
+    .chip.selected { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+
+    /* ── btn ── */
+    .btn-primary {
+      width: 100%; margin-top: 22px;
+      padding: 15px;
+      background: var(--green); color: var(--bg);
+      border: none; border-radius: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: .5px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-primary:hover  { opacity: .9; }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── toast ── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--surface); border: 1px solid var(--green);
+      color: var(--green); padding: 12px 22px; border-radius: 12px;
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      box-shadow: 0 8px 32px #00000066;
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      opacity: 0; z-index: 999;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.error { border-color: var(--red); color: var(--red); }
+
+    /* ── recent list ── */
+    .recent { margin-top: 20px; }
+    .recent-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 10px;
+    }
+    .tx-list { display: flex; flex-direction: column; gap: 8px; }
+    .tx-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px;
+      animation: fadeUp .3s ease both;
+    }
+    .tx-left { display: flex; align-items: center; gap: 10px; }
+    .tx-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .tx-dot.receita { background: var(--green); }
+    .tx-dot.saida   { background: var(--red); }
+    .tx-name { font-size: 12px; font-weight: 600; }
+    .tx-cat  { font-size: 10px; color: var(--muted); font-family: 'Space Mono', monospace; }
+    .tx-amount {
+      font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    }
+    .tx-amount.receita { color: var(--green); }
+    .tx-amount.saida   { color: var(--red); }
+  </style>
 </head>
 <body>
 
 <div class="wrapper">
-
   <!-- logo -->
   <div class="logo">
     <div class="logo-icon">
@@ -26,7 +254,7 @@
       <span class="card-title">Novo Lançamento</span>
       <div class="type-toggle">
         <button class="type-btn active-receita" id="btn-receita" onclick="setTipo('receita')">+ Receita</button>
-        <button class="type-btn" id="btn-saida" onclick="setTipo('saida')">− Saída</button>
+        <button class="type-btn" id="btn-saida"   onclick="setTipo('saida')">− Saída</button>
       </div>
     </div>
 
@@ -50,7 +278,7 @@
       <span class="err-msg" id="err-valor">Informe um valor válido.</span>
     </div>
 
-    <!-- Data + Recorrência -->
+    <!-- Data + Categoria -->
     <div class="input-row">
       <div class="field">
         <label>Data</label>
@@ -81,13 +309,12 @@
       <div class="chips" id="chips"></div>
     </div>
 
-    <!-- Botão salvar -->
     <button class="btn-primary" id="btn-salvar" onclick="salvar()">
       <svg fill="currentColor" width="16" viewBox="0 0 24 24"><path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"/></svg>
       Salvar Lançamento
     </button>
 
-    <!-- Lista de recentes -->
+    <!-- recentes -->
     <div class="recent" id="recent-section" style="display:none">
       <div class="recent-title">Lançamentos recentes</div>
       <div class="tx-list" id="tx-list"></div>
@@ -95,9 +322,161 @@
   </div>
 </div>
 
-<!-- Toast de feedback -->
+<!-- toast -->
 <div class="toast" id="toast"></div>
 
-<script src="script.js"></script>
+<script>
+  // ── state ──
+  let tipo = 'receita';
+  let catSelecionada = '';
+  const categorias = {
+    receita: ['Salário','Freelance','Investimento','Presente','Outros'],
+    saida:   ['Moradia','Alimentação','Transporte','Saúde','Lazer','Outros']
+  };
+  const lancamentos = [];
+
+  // ── init ──
+  setDataHoje();
+  renderChips();
+
+  function setDataHoje() {
+    const d = new Date();
+    const dd = String(d.getDate()).padStart(2,'0');
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const yy = d.getFullYear();
+    document.getElementById('data').value = `${dd}/${mm}/${yy}`;
+  }
+
+  // ── tipo toggle ──
+  function setTipo(t) {
+    tipo = t;
+    document.getElementById('btn-receita').className = 'type-btn' + (t==='receita' ? ' active-receita' : '');
+    document.getElementById('btn-saida').className   = 'type-btn' + (t==='saida'   ? ' active-saida'   : '');
+    catSelecionada = '';
+    renderChips();
+    colorValor();
+  }
+
+  // ── chips ──
+  function renderChips() {
+    const el = document.getElementById('chips');
+    el.innerHTML = '';
+    categorias[tipo].forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'chip' + (c === catSelecionada ? ' selected' : '');
+      btn.textContent = c;
+      btn.onclick = () => { catSelecionada = c; renderChips(); };
+      el.appendChild(btn);
+    });
+  }
+
+  // ── valor mask ──
+  document.getElementById('valor').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'');
+    if (!v) { this.value=''; return; }
+    v = (parseInt(v,10)/100).toFixed(2);
+    this.value = 'R$ ' + v.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+    colorValor();
+  });
+  function colorValor() {
+    const el = document.getElementById('valor');
+    el.className = el.value ? tipo : '';
+  }
+
+  // ── data mask ──
+  document.getElementById('data').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'');
+    if (v.length > 2) v = v.slice(0,2)+'/'+v.slice(2);
+    if (v.length > 5) v = v.slice(0,5)+'/'+v.slice(5);
+    this.value = v.slice(0,10);
+  });
+
+  // ── validação ──
+  function validate() {
+    let ok = true;
+    const desc  = document.getElementById('desc').value.trim();
+    const valor = document.getElementById('valor').value;
+    const data  = document.getElementById('data').value;
+
+    toggle('wrap-desc','err-desc', !desc);
+    if(!desc) ok=false;
+
+    const num = parseFloat(valor.replace(/[R$\s.]/g,'').replace(',','.'));
+    toggle('wrap-valor','err-valor', !valor||isNaN(num)||num<=0);
+    if(!valor||isNaN(num)||num<=0) ok=false;
+
+    const dateReg = /^\d{2}\/\d{2}\/\d{4}$/;
+    toggle('wrap-data','err-data', !dateReg.test(data));
+    if(!dateReg.test(data)) ok=false;
+
+    return ok;
+  }
+
+  function toggle(wrapId, errId, hasError) {
+    document.getElementById(wrapId).classList.toggle('error', hasError);
+    document.getElementById(errId).classList.toggle('show', hasError);
+  }
+
+  // ── salvar ──
+  function salvar() {
+    if (!validate()) { showToast('Corrija os campos em vermelho.', true); return; }
+
+    const desc    = document.getElementById('desc').value.trim();
+    const valor   = document.getElementById('valor').value;
+    const data    = document.getElementById('data').value;
+    const recorr  = document.getElementById('recorrencia').value;
+    const cat     = catSelecionada || 'Outros';
+
+    lancamentos.unshift({ desc, valor, data, tipo, cat, recorr });
+    renderRecentes();
+    showToast(`Lançamento "${desc}" salvo com sucesso!`);
+    resetForm();
+  }
+
+  function resetForm() {
+    document.getElementById('desc').value  = '';
+    document.getElementById('valor').value = '';
+    document.getElementById('recorrencia').value = 'unica';
+    setDataHoje();
+    catSelecionada = '';
+    renderChips();
+    ['wrap-desc','wrap-valor','wrap-data'].forEach(id =>
+      document.getElementById(id).classList.remove('error'));
+    ['err-desc','err-valor','err-data'].forEach(id =>
+      document.getElementById(errId => document.getElementById(id).classList.remove('show')));
+  }
+
+  // ── recentes ──
+  function renderRecentes() {
+    const sec  = document.getElementById('recent-section');
+    const list = document.getElementById('tx-list');
+    sec.style.display = 'block';
+    list.innerHTML = '';
+    lancamentos.slice(0,5).forEach(tx => {
+      const item = document.createElement('div');
+      item.className = 'tx-item';
+      const sinal = tx.tipo==='receita' ? '+' : '−';
+      item.innerHTML = `
+        <div class="tx-left">
+          <div class="tx-dot ${tx.tipo}"></div>
+          <div>
+            <div class="tx-name">${tx.desc}</div>
+            <div class="tx-cat">${tx.cat} · ${tx.data}</div>
+          </div>
+        </div>
+        <div class="tx-amount ${tx.tipo}">${sinal} ${tx.valor.replace('R$ ','R$\u00a0')}</div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  // ── toast ──
+  function showToast(msg, isError=false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (isError?' error':'') + ' show';
+    setTimeout(()=> t.className = 'toast'+(isError?' error':''), 3000);
+  }
+</script>
 </body>
 </html>
