@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --bg-system: #0b0f17; --bg-card: #161b22; --ui-border: #30363d;
+    --text-main: #e6edf3; --text-muted: #8b949e; --primary: #12d68e;
+    --primary-dim: rgba(18, 214, 142, 0.12); --red: #ff5756; --yellow: #f5c543;
+}
+html, body { height: 100%; background-color: var(--bg-system); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* Telas Login/Cadastro */
+.auth-body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+.auth-container { width: 100%; max-width: 400px; }
+.auth-header { text-align: center; margin-bottom: 24px; }
+.brand-icon { width: 44px; height: 44px; background: var(--bg-card); border: 1px solid var(--ui-border); border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.brand-icon i { color: var(--primary); font-size: 18px; }
+.auth-header h1, .header-brand h1 { font-family: 'Space Mono', monospace; font-size: 26px; }
+.auth-header h1 span, .header-brand h1 span { color: var(--primary); }
+.auth-header p, .header-brand p { color: var(--text-muted); font-size: 12px; }
+
+/* Cards Genéricos */
+.card { background-color: var(--bg-card); border: 1px solid var(--ui-border); border-radius: 16px; padding: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.card h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; font-family: 'Space Mono', monospace;}
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+.input-control { display: flex; align-items: center; gap: 10px; background-color: var(--bg-system); border: 1px solid var(--ui-border); border-radius: 10px; padding: 12px 14px; }
+.input-control i { color: var(--text-muted); font-size: 13px; }
+.input-control input { background: transparent; border: none; outline: none; color: var(--text-main); font-size: 14px; width: 100%; }
+.input-control:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-dim); }
+
+.btn-submit { width: 100%; padding: 14px; background-color: var(--primary); color: #000; border: none; border-radius: 10px; font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: 0.2s;}
+.btn-submit:hover { opacity: 0.9; }
+.ui-divider { height: 1px; background-color: var(--ui-border); margin: 20px 0; }
+.auth-footer { text-align: center; font-size: 12px; color: var(--text-muted); }
+.auth-footer a { color: var(--primary); text-decoration: none; font-weight: 600;}
+
+/* Dashboard PC - Lista Esquerda / Form Direita */
+.dashboard-body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+.dashboard-grid { width: 100%; max-width: 950px; display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start;}
+.dashboard-header { grid-column: span 2; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ui-border); padding-bottom: 16px; }
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.btn-logout { background: transparent; border: 1px solid var(--ui-border); color: var(--text-muted); padding: 6px 12px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; }
+.btn-logout:hover { border-color: var(--red); color: var(--red); }
+
+/* Painel Esquerdo (Lista) */
+.recent-panel { grid-column: 1; grid-row: 2; background-color: var(--bg-card); border: 1px solid var(--ui-border); border-radius: 16px; padding: 20px; height: 480px; display: flex; flex-direction: column; }
+.panel-header h2 { font-size: 11px; font-family: 'Space Mono', monospace; color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px; }
+.tx-list { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; height: 100%; }
+.tx-list::-webkit-scrollbar { width: 4px; }
+.tx-list::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+.tx-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 4px; border-bottom: 1px solid rgba(48, 54, 61, 0.4); gap: 8px; }
+.tx-info { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.tx-tag { background-color: rgba(255,87,86,0.1); color: var(--red); font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.tx-name { font-size: 13px; color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tx-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-muted); margin-left: auto; }
+.tx-actions { display: flex; align-items: center; gap: 10px; }
+.tx-amount { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #cbd5e1; }
+.btn-action { background: transparent; border: none; cursor: pointer; font-size: 13px; opacity: 0.6; }
+.btn-action:hover { opacity: 1; }
+.btn-edit { color: var(--yellow); }
+.btn-delete { color: var(--red); }
+
+/* Painel Direito (Formulário) */
+.form-panel { grid-column: 2; grid-row: 2; height: fit-content; }
+
+/* Modal Edição */
+.modal-backdrop { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.modal-backdrop.active { opacity: 1; pointer-events: all; }
+.modal-card { width: 100%; max-width: 400px; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.modal-close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+.btn-update { background-color: var(--yellow); }

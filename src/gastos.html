@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinApp - Gastos | v0.1.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-grid">
+        <header class="dashboard-header">
+            <div class="header-brand">
+                <div class="brand-icon"><i class="fas fa-receipt"></i></div>
+                <div><h1>Fin<span>App</span></h1><p>Painel de Controle de Gastos</p></div>
+            </div>
+            <button id="logoutBtn" class="btn-logout">Sair <i class="fas fa-sign-out-alt"></i></button>
+        </header>
+
+        <aside class="recent-panel">
+            <div class="panel-header"><h2><i class="fas fa-list-ul"></i> Histórico</h2></div>
+            <div class="tx-list" id="tx-list"></div>
+        </aside>
+
+        <main class="card form-panel">
+            <h2>Novo Gasto</h2>
+            <form id="gastoForm">
+                <input type="hidden" id="gasto-index" value="">
+                <div class="form-group">
+                    <label for="gasto-desc">Descrição</label>
+                    <div class="input-control" id="wrap-g-desc">
+                        <i class="fas fa-pen"></i>
+                        <input type="text" id="gasto-desc" placeholder="Ex: Mercado...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gasto-valor">Valor</label>
+                    <div class="input-control" id="wrap-g-valor">
+                        <i class="fas fa-dollar-sign"></i>
+                        <input type="text" id="gasto-valor" placeholder="R$ 0,00" inputmode="decimal">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gasto-data">Data</label>
+                    <div class="input-control" id="wrap-g-data">
+                        <i class="fas fa-calendar-days"></i>
+                        <input type="text" id="gasto-data" placeholder="DD/MM/AAAA" maxlength="10">
+                    </div>
+                </div>
+                <button class="btn-submit" type="submit">Salvar Gasto</button>
+            </form>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="editModal">
+        <div class="modal-card card">
+            <div class="modal-header">
+                <h3>Editar Registro</h3>
+                <button class="modal-close-btn" id="closeModalBtn" type="button"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="editGastoForm">
+                <div class="form-group">
+                    <div class="input-control"><i class="fas fa-pen"></i><input type="text" id="edit-gasto-desc"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-control"><i class="fas fa-dollar-sign"></i><input type="text" id="edit-gasto-valor" inputmode="decimal"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-control"><i class="fas fa-calendar-days"></i><input type="text" id="edit-gasto-data" maxlength="10"></div>
+                </div>
+                <button class="btn-submit btn-update" type="submit">Atualizar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
