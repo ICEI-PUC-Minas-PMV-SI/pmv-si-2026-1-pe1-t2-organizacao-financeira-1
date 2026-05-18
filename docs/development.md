@@ -2,43 +2,47 @@
 
 Implementação do sistema descritas por meio dos requisitos funcionais e/ou não funcionais. Deve relacionar os requisitos atendidos os artefatos criados (código fonte) além das estruturas de dados utilizadas e as instruções para acesso e verificação da implementação que deve estar funcional no ambiente de hospedagem.
 
-Para cada requisito funcional, pode ser entregue um artefato desse tipo.
-
-O professor Rommel Carneiro apresenta alguns exemplos prontos para serem utilizados como referência:
-- Login do sistema: [https://repl.it/@rommelpuc/LoginApp](https://repl.it/@rommelpuc/LoginApp) 
-- Cadastro de Contatos: [https://repl.it/@rommelpuc/Cadastro-de-Contatos](https://repl.it/@rommelpuc/Cadastro-de-Contatos)
-
-
-> **Links Úteis**:
->
-> - [Trabalhando com HTML5 Local Storage e JSON](https://www.devmedia.com.br/trabalhando-com-html5-local-storage-e-json/29045)
-> - [JSON Tutorial](https://www.w3resource.com/JSON)
-> - [JSON Data Set Sample](https://opensource.adobe.com/Spry/samples/data_region/JSONDataSetSample.html)
-> - [JSON - Introduction (W3Schools)](https://www.w3schools.com/js/js_json_intro.asp)
-> - [JSON Tutorial (TutorialsPoint)](https://www.tutorialspoint.com/json/index.htm)
-
-## Exemplo
-
 ## Requisitos Atendidos
 
 As tabelas que se seguem apresentam os requisitos funcionais e não-funcionais que relacionam o escopo do projeto com os artefatos criados:
 
-### Requisitos Funcionais
+### Requisitos Atendidos
 
-|ID    | Descrição do Requisito | Responsável | Artefato Criado |
-|------|------------------------|------------|-----------------|
-|RF-001| A aplicação deve permitir que o usuário gerencie suas tarefas | João | index.html |
-|RF-002| A aplicação deve permitir ao usuário fazer login em sua conta | Luiz Felipe | tela-login.html |
+Com base exclusivamente no código e nas telas que desenvolvemos ao longo deste chat (onde enxugamos o projeto para 3 inputs exatos por tela e removemos funcionalidades não implementadas como gráficos, metas e categorias), a tabela de requisitos fica assim:
 
-## Descrição das estruturas:
+#### Requisitos Funcionais
 
-### Login
+| ID | Descrição do Requisito | Responsável | Artefato Criado |
+| :--- | :--- | :--- | :--- |
+| RF-01 | A aplicação deve permitir que o usuário crie uma conta | Desenvolvedor | `cadastre-se.html`, `script.js`, `style.css` |
+| RF-02 | A aplicação deve permitir ao usuário fazer login em sua conta | Desenvolvedor | `index.html`, `script.js`, `style.css` |
+| RF-04 | A aplicação deve permitir que o usuário cadastre as suas despesas | Desenvolvedor | `gastos.html`, `script.js`, `style.css` |
 
-| Nome             | Tipo              | Descrição                                      | Exemplo             |
-|------------------|-------------------|-----------------------------------------------|---------------------|
-| Email            | Texto             | Endereço de e-mail do usuário                 | usuario@email.com   |
-| Senha            | Texto             | Senha digitada pelo usuário                   | ****            |
-| Lembrar Login    | Booleano          | Indica se o usuário quer permanecer logado    | true / false        |
-| Token de Acesso  | Texto (JWT)       | Token gerado após autenticação                | eyJhbGciOiJIUzI1... |
-| Data de Login    | Data/Hora         | Data e hora do login                          | 2026-05-11 19:30    |
-| Status Login     | Texto             | Resultado do login                            | Sucesso / Erro      |
+---
+
+### Descrição das estruturas:
+
+Como o banco de dados utilizado foi o `localStorage` do navegador, não há geração de Tokens, status de sessão ou datas automáticas de login. As estruturas refletem estritamente as chaves e objetos que o JavaScript salva e lê.
+
+#### 1. Login (Validação na chave `dbuser`)
+
+| Nome | Tipo | Descrição | Exemplo |
+| :--- | :--- | :--- | :--- |
+| Email | Texto | Endereço de e-mail inserido para acessar o painel | exemplo@email.com |
+| Senha | Texto | Senha inserida para validação de acesso | 123456 |
+
+#### 2. Cadastro de Usuário (Objeto salvo na chave `dbuser`)
+
+| Nome | Tipo | Descrição | Exemplo |
+| :--- | :--- | :--- | :--- |
+| Nome | Texto | Nome completo do usuário registrado | João Silva |
+| Email | Texto | Endereço de e-mail do usuário | exemplo@email.com |
+| Senha | Texto | Senha criada para acesso ao sistema | 123456 |
+
+#### 3. Cadastro de Gastos (Array de objetos salvo na chave `dbgastos`)
+
+| Nome | Tipo | Descrição | Exemplo |
+| :--- | :--- | :--- | :--- |
+| Descrição | Texto | Título ou detalhe indicando no que o dinheiro foi gasto | Mercado, Combustível |
+| Valor | Texto | Montante financeiro do gasto, salvo com a máscara de moeda | R$ 185,50 |
+| Data | Texto | Data em que a despesa ocorreu, salva com a máscara de calendário | 18/05/2026 |
