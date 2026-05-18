@@ -14,9 +14,9 @@ Com base exclusivamente no código e nas telas que desenvolvemos ao longo deste 
 
 | ID | Descrição do Requisito | Responsável | Artefato Criado |
 | :--- | :--- | :--- | :--- |
-| RF-01 | A aplicação deve permitir que o usuário crie uma conta | Desenvolvedor | `cadastre-se.html`, `script.js`, `style.css` |
-| RF-02 | A aplicação deve permitir ao usuário fazer login em sua conta | Desenvolvedor | `index.html`, `script.js`, `style.css` |
-| RF-04 | A aplicação deve permitir que o usuário cadastre as suas despesas | Desenvolvedor | `gastos.html`, `script.js`, `style.css` |
+| RF-01 | A aplicação deve permitir que o usuário crie uma conta |  Vanessa, Andŕe, Raul | `cadastre-se.html`, `script.js`, `style.css` |
+| RF-02 | A aplicação deve permitir ao usuário fazer login em sua conta | Luiz, Lucca, Caio | `index.html`, `script.js`, `style.css` |
+| RF-04 | A aplicação deve permitir que o usuário cadastre as suas despesas | Caio e Luiz | `gastos.html`, `script.js`, `style.css` |
 
 ---
 
