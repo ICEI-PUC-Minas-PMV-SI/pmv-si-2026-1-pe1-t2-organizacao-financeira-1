@@ -154,9 +154,14 @@
                 required
                 maxlength="30"
               />
-              <button type="submit" class="btn-primary w-full">
-                Adicionar
-              </button>
+              <div class="flex-gap">
+                <button type="submit" class="btn-primary w-full" id="submit-btn">
+                  Adicionar
+                </button>
+                <button type="button" class="btn-secondary hidden" id="cancel-edit-btn" onclick="cancelEdit()">
+                  Cancelar
+                </button>
+              </div>
             </form>
           </div>
         </div>
