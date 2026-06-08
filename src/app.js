@@ -4,6 +4,7 @@ let isLoginMode = true;
 let currentUser = null;
 let transactions = [];
 let monthlyGoal = 0;
+let editingTransactionId = null; // 🔹 Novo estado para saber se estamos editando
 
 const categoryConfig = {
   Moradia: { icon: "home", type: "expense" },
@@ -16,7 +17,6 @@ const categoryConfig = {
   Outros: { icon: "tag", type: "both" },
 };
 
-// 🔹 Checa login ao carregar qualquer página
 document.addEventListener("DOMContentLoaded", () => {
   const loggedEmail = localStorage.getItem("finapp_logged_user");
   if (loggedEmail) {
@@ -53,7 +53,7 @@ function handleAuth(e) {
       savedUser.password === document.getElementById("password").value
     ) {
       currentUser = savedUser;
-      localStorage.setItem("finapp_logged_user", email); // 🔹 Marca como logado
+      localStorage.setItem("finapp_logged_user", email);
       initDashboard();
     } else {
       alert("Credenciais incorretas ou usuário não existe.");
@@ -63,7 +63,7 @@ function handleAuth(e) {
     const password = document.getElementById("password").value;
     currentUser = { name, email, password };
     localStorage.setItem(`finapp_user_${email}`, JSON.stringify(currentUser));
-    localStorage.setItem("finapp_logged_user", email); // 🔹 Marca como logado
+    localStorage.setItem("finapp_logged_user", email);
     initDashboard();
   }
 }
@@ -72,31 +72,39 @@ function logout() {
   currentUser = null;
   transactions = [];
   monthlyGoal = 0;
+  editingTransactionId = null;
 
-  // 🔹 Remove login persistido
   localStorage.removeItem("finapp_logged_user");
 
   document.getElementById("dashboard-view").classList.add("hidden");
   document.getElementById("auth-view").classList.remove("hidden");
 
-  document.getElementById("auth-form").reset();
-  document.getElementById("transaction-form").reset();
-  document.getElementById("goal-form").reset();
+  // Travas de segurança para evitar erros na página de calculadoras
+  const authForm = document.getElementById("auth-form");
+  if(authForm) authForm.reset();
+  
+  const transForm = document.getElementById("transaction-form");
+  if(transForm) transForm.reset();
+  
+  const goalForm = document.getElementById("goal-form");
+  if(goalForm) goalForm.reset();
 
-  document.getElementById("goal-fill").style.width = "0%";
-  document.getElementById("goal-percentage").innerText = "0%";
-  document.getElementById("monthly-goal").value = "";
-  document.getElementById("alerts-container").innerHTML = "";
-  document.getElementById("category-chart").innerHTML = "";
-  document.getElementById("transactions-list").innerHTML = "";
+  if(document.getElementById("goal-fill")) {
+    document.getElementById("goal-fill").style.width = "0%";
+    document.getElementById("goal-percentage").innerText = "0%";
+    document.getElementById("monthly-goal").value = "";
+    document.getElementById("alerts-container").innerHTML = "";
+    document.getElementById("category-chart").innerHTML = "";
+    document.getElementById("transactions-list").innerHTML = "";
+  }
 }
 
 function initDashboard() {
   document.getElementById("auth-view").classList.add("hidden");
   document.getElementById("dashboard-view").classList.remove("hidden");
 
-  document.getElementById("user-name-display").innerText =
-    currentUser.name.split(" ")[0];
+  const nameDisplay = document.getElementById("user-name-display");
+  if(nameDisplay) nameDisplay.innerText = currentUser.name.split(" ")[0];
 
   const savedData = JSON.parse(
     localStorage.getItem(`finapp_data_${currentUser.email}`),
@@ -104,8 +112,8 @@ function initDashboard() {
   transactions = savedData.transactions || [];
   monthlyGoal = savedData.goal || 0;
 
-  document.getElementById("monthly-goal").value =
-    monthlyGoal > 0 ? monthlyGoal : "";
+  const monthlyGoalInput = document.getElementById("monthly-goal");
+  if(monthlyGoalInput) monthlyGoalInput.value = monthlyGoal > 0 ? monthlyGoal : "";
 
   updateCategoryOptions();
   updateUI();
@@ -119,17 +127,23 @@ function saveData() {
 }
 
 function updateCategoryOptions() {
-  const type = document.getElementById("trans-type").value;
-  const select = document.getElementById("trans-category");
-  select.innerHTML = "";
+  const typeSelect = document.getElementById("trans-type");
+  const categorySelect = document.getElementById("trans-category");
+  
+  // 🔹 Trava: Evita quebrar a página de calculadoras
+  if (!typeSelect || !categorySelect) return; 
+
+  const type = typeSelect.value;
+  categorySelect.innerHTML = "";
 
   for (const [cat, config] of Object.entries(categoryConfig)) {
     if (config.type === type || config.type === "both") {
-      select.innerHTML += `<option value="${cat}">${cat}</option>`;
+      categorySelect.innerHTML += `<option value="${cat}">${cat}</option>`;
     }
   }
 }
 
+// 🔹 Lógica Central do CRUD: Create & Update
 function addTransaction(e) {
   e.preventDefault();
   const type = document.getElementById("trans-type").value;
@@ -137,21 +151,66 @@ function addTransaction(e) {
   const category = document.getElementById("trans-category").value;
   const desc = document.getElementById("trans-desc").value;
 
-  const newTransaction = {
-    id: Date.now(),
-    type,
-    amount,
-    category,
-    desc,
-    date: new Intl.DateTimeFormat("pt-BR").format(new Date()),
-  };
+  if (editingTransactionId) {
+    // Modo Edição (Update)
+    const index = transactions.findIndex(t => t.id === editingTransactionId);
+    if(index !== -1) {
+      transactions[index] = { ...transactions[index], type, amount, category, desc };
+    }
+    cancelEdit(); // Limpa estado após salvar
+  } else {
+    // Modo Criação (Create)
+    const newTransaction = {
+      id: Date.now(),
+      type,
+      amount,
+      category,
+      desc,
+      date: new Intl.DateTimeFormat("pt-BR").format(new Date()),
+    };
+    transactions.unshift(newTransaction);
+    document.getElementById("transaction-form").reset();
+  }
 
-  transactions.unshift(newTransaction);
   saveData();
-
-  document.getElementById("transaction-form").reset();
   updateCategoryOptions();
   updateUI();
+}
+
+// 🔹 Editar (Update)
+function editTransaction(id) {
+  const t = transactions.find(t => t.id === id);
+  if (!t) return;
+  
+  editingTransactionId = id;
+  
+  document.getElementById("trans-type").value = t.type;
+  updateCategoryOptions(); // Atualiza as opções do select com base no tipo
+  
+  document.getElementById("trans-amount").value = t.amount;
+  document.getElementById("trans-category").value = t.category;
+  document.getElementById("trans-desc").value = t.desc;
+
+  // Altera os botões do formulário
+  document.getElementById("submit-btn").innerText = "Atualizar";
+  document.getElementById("cancel-edit-btn").classList.remove("hidden");
+}
+
+function cancelEdit() {
+  editingTransactionId = null;
+  document.getElementById("transaction-form").reset();
+  updateCategoryOptions();
+  document.getElementById("submit-btn").innerText = "Adicionar";
+  document.getElementById("cancel-edit-btn").classList.add("hidden");
+}
+
+// 🔹 Excluir (Delete)
+function deleteTransaction(id) {
+  if (confirm("Tem certeza que deseja excluir esta transação?")) {
+    transactions = transactions.filter(t => t.id !== id);
+    saveData();
+    updateUI();
+  }
 }
 
 function setGoal(e) {
@@ -162,10 +221,17 @@ function setGoal(e) {
 }
 
 function updateUI() {
+  const listEl = document.getElementById("transactions-list");
+  
+  // 🔹 Trava: Se estiver na página de calculadoras, só roda os ícones
+  if (!listEl) {
+    lucide.createIcons();
+    return;
+  }
+
   let income = 0;
   let expense = 0;
   let expenseByCategory = {};
-  const listEl = document.getElementById("transactions-list");
   listEl.innerHTML = "";
 
   transactions.forEach((t) => {
@@ -183,7 +249,7 @@ function updateUI() {
     const iconName = categoryConfig[t.category]?.icon || "tag";
 
     listEl.innerHTML += `
-      <div class="transaction-item">
+      <div class="transaction-item flex-between">
         <div class="flex-center-gap">
           <div class="transaction-icon-box"><i data-lucide="${iconName}"></i></div>
           <div>
@@ -191,8 +257,14 @@ function updateUI() {
             <p class="caption">${t.category} • ${t.date}</p>
           </div>
         </div>
-        <div class="${colorClass} font-bold">
-          ${operator} R$ ${t.amount.toFixed(2)}
+        <div class="flex-center-gap">
+          <div class="${colorClass} font-bold mr-2">
+            ${operator} R$ ${t.amount.toFixed(2)}
+          </div>
+          <div class="transaction-actions">
+            <button onclick="editTransaction(${t.id})" class="btn-icon text-warning" title="Editar"><i data-lucide="edit-2"></i></button>
+            <button onclick="deleteTransaction(${t.id})" class="btn-icon text-error" title="Excluir"><i data-lucide="trash-2"></i></button>
+          </div>
         </div>
       </div>
     `;
@@ -203,11 +275,9 @@ function updateUI() {
 
   const balance = income - expense;
 
-  document.getElementById("total-balance").innerText =
-    `R$ ${balance.toFixed(2)}`;
+  document.getElementById("total-balance").innerText = `R$ ${balance.toFixed(2)}`;
   document.getElementById("total-income").innerText = `R$ ${income.toFixed(2)}`;
-  document.getElementById("total-expense").innerText =
-    `R$ ${expense.toFixed(2)}`;
+  document.getElementById("total-expense").innerText = `R$ ${expense.toFixed(2)}`;
 
   renderAlerts(balance, expense, income);
   renderCategoryChart(expenseByCategory, expense);
@@ -268,7 +338,8 @@ function renderCategoryChart(expenseByCategory, totalExpense) {
   let chartHTML = "";
 
   sortedCategories.forEach(([cat, amount]) => {
-    const percentage = (amount / totalExpense) * 100;
+    const baseValue = (monthlyGoal > 0) ? monthlyGoal : totalExpense;
+    const percentage = (amount / baseValue) * 100;
     const iconName = categoryConfig[cat]?.icon || "tag";
 
     chartHTML += `
