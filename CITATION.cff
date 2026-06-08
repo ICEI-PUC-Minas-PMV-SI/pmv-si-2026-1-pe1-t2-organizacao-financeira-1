@@ -16,10 +16,14 @@ authors:
     family-names: de Oliveira
     email: caio.milagres@sga.pucminas.br
     affiliation: PUC Minas
+- given-names: Luiz Felipe 
+    family-names: Frenandes
+    email: lfficosta@sga.pucmins.br
+    affiliation: PUC Minas
     name-suffix: Prof.
     affiliation: PUC Minas
-    given-names: 
-    family-names: 
+    given-names: Clóvis
+    family-names: Lemos
 repository-code: >-
   https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2026-1-pe1-t2-organizacao-financeira-1/tree/main
 abstract: >-
