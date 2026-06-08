@@ -1,101 +1,112 @@
-:root {
-    --primary: #12D68E;
-    --warning: #F5C543;
-    --danger: #FF5756;
-    --bg-main: #0B111D;
-    --bg-card: #1A2230;
-    --text-white: #FFFFFF;
-    --text-gray: #9CA3AF;
-    --border: #2D3748;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinApp - Organização Financeira</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+    <main id="auth-view" class="auth-container">
+        <div class="auth-card">
+            <div class="brand">
+                <i data-lucide="wallet" class="brand-icon"></i>
+                <h1>FinApp</h1>
+            </div>
+            <p class="caption">Controle seu patrimônio com inteligência</p>
+            
+            <form id="auth-form" onsubmit="handleAuth(event)" class="mt-4">
+                <input type="text" id="username" placeholder="Seu nome completo" class="hidden">
+                <input type="email" id="email" placeholder="seu@email.com" required>
+                <input type="password" id="password" placeholder="Sua senha secreta" required>
+                <button type="submit" class="btn-primary w-full" id="auth-btn">Entrar</button>
+            </form>
+            <button onclick="toggleAuthMode()" class="btn-text" id="toggle-auth">Ainda não tem conta? Cadastre-se</button>
+        </div>
+    </main>
 
-body {
-    background-color: var(--bg-main);
-    color: var(--text-white);
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
+    <main id="dashboard-view" class="dashboard-container hidden">
+        <aside class="sidebar">
+            <div class="brand">
+                <i data-lucide="wallet" class="brand-icon"></i>
+                <h2>FinApp</h2>
+            </div>
+            <nav class="mt-4">
+                <a href="#" onclick="logout()" class="btn-logout"><i data-lucide="log-out"></i> Sair da Conta</a>
+            </nav>
+        </aside>
 
-.h1 { font-size: 32px; font-weight: 700; }
-.h2 { font-size: 24px; font-weight: 600; }
-.h3 { font-size: 20px; font-weight: 600; }
-.caption { font-size: 14px; color: var(--text-gray); }
-.text-center { text-align: center; }
+        <section class="main-content">
+            <header>
+                <div>
+                    <h1 class="h2">Bem-vindo, <span id="user-name-display" class="text-success">Usuário</span></h1>
+                    <p class="caption">Visão geral das suas finanças</p>
+                </div>
+            </header>
 
-.hidden { display: none !important; }
-.mt-1 { margin-top: 8px; }
-.mt-2 { margin-top: 16px; }
-.mt-4 { margin-top: 32px; }
-.w-full { width: 100%; }
-.flex-between { display: flex; justify-content: space-between; align-items: center; }
-.flex-gap { display: flex; gap: 12px; }
-.flex-center-gap { display: flex; align-items: center; gap: 8px; }
+            <div id="alerts-container" class="mt-2"></div>
 
-.text-success { color: var(--primary); display: flex; align-items: center; gap: 4px; }
-.text-error { color: var(--danger); display: flex; align-items: center; gap: 4px; }
-.text-warning { color: var(--warning); display: flex; align-items: center; gap: 4px; }
+            <div class="grid-layout">
+                <div class="card">
+                    <h3 class="h3">Minhas Finanças</h3>
+                    <div class="balance-info mt-2">
+                        <p class="caption">Saldo Atual</p>
+                        <h2 class="h1" id="total-balance">R$ 0,00</h2>
+                    </div>
+                    <div class="flex-between mt-4">
+                        <div class="text-success"><i data-lucide="arrow-up-right"></i> <span id="total-income">R$ 0,00</span></div>
+                        <div class="text-error"><i data-lucide="arrow-down-right"></i> <span id="total-expense">R$ 0,00</span></div>
+                    </div>
+                </div>
 
-input, select {
-    width: 100%;
-    padding: 14px;
-    background-color: var(--bg-main);
-    border: 1px solid var(--border);
-    color: var(--text-white);
-    border-radius: 8px;
-    margin-bottom: 12px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-input:focus, select:focus { border-color: var(--primary); }
+                <div class="card">
+                    <h3 class="h3 flex-center-gap"><i data-lucide="target"></i> Metas do Mês</h3>
+                    <form id="goal-form" onsubmit="setGoal(event)" class="mt-2 flex-gap">
+                        <input type="number" id="monthly-goal" placeholder="Limite (R$)" required min="1">
+                        <button type="submit" class="btn-secondary">Salvar</button>
+                    </form>
+                    <div class="mt-4">
+                        <p class="caption flex-between"><span>Progresso da Meta</span> <span id="goal-percentage">0%</span></p>
+                        <div class="progress-bar mt-1">
+                            <div class="progress-fill" id="goal-fill"></div>
+                        </div>
+                    </div>
+                </div>
 
-.btn-primary { background-color: var(--primary); color: #000; border: none; padding: 14px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.btn-primary:hover { filter: brightness(1.1); }
-.btn-secondary { background-color: var(--border); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; transition: 0.2s;}
-.btn-secondary:hover { background-color: #3f4c6b; }
-.btn-text { background: none; border: none; color: var(--primary); cursor: pointer; font-size: 14px; }
+                <div class="card">
+                    <h3 class="h3">Nova Transação</h3>
+                    <form id="transaction-form" onsubmit="addTransaction(event)" class="form-grid mt-2">
+                        <div class="flex-gap">
+                            <select id="trans-type" required onchange="updateCategoryOptions()">
+                                <option value="expense">Despesa (-)</option>
+                                <option value="income">Receita (+)</option>
+                            </select>
+                            <input type="number" id="trans-amount" placeholder="Valor (R$)" step="0.01" required min="0.01">
+                        </div>
+                        <select id="trans-category" required></select>
+                        <input type="text" id="trans-desc" placeholder="Descrição curta" required maxlength="30">
+                        <button type="submit" class="btn-primary w-full">Adicionar</button>
+                    </form>
+                </div>
+            </div>
 
-.auth-container { height: 100vh; display: flex; align-items: center; justify-content: center; }
-.auth-card { background-color: var(--bg-card); padding: 40px; border-radius: 16px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.brand { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--primary); }
-.brand h1, .brand h2 { margin: 0; }
+            <div class="grid-layout-2 mt-4">
+                <div class="card">
+                    <h3 class="h3 flex-center-gap"><i data-lucide="pie-chart"></i> Despesas por Categoria</h3>
+                    <div id="category-chart" class="mt-4"></div>
+                </div>
 
-.dashboard-container { display: flex; min-height: 100vh; }
-.sidebar { width: 260px; background-color: var(--bg-card); padding: 32px 24px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; }
-.btn-logout { display: flex; align-items: center; gap: 12px; color: var(--danger); text-decoration: none; padding: 12px; border-radius: 8px; transition: 0.2s; border: 1px solid transparent; }
-.btn-logout:hover { background-color: rgba(255, 87, 86, 0.1); border-color: rgba(255, 87, 86, 0.3); }
+                <div class="card">
+                    <h3 class="h3">Últimas Movimentações</h3>
+                    <div id="transactions-list" class="mt-2 transaction-list-container"></div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-.main-content { flex: 1; padding: 40px; overflow-y: auto; }
-.grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 24px; }
-.grid-layout-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.card { background-color: var(--bg-card); padding: 24px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-
-.progress-bar { width: 100%; height: 10px; background-color: var(--bg-main); border-radius: 5px; overflow: hidden; }
-.progress-fill { height: 100%; background-color: var(--primary); transition: width 0.4s ease, background-color 0.4s ease; }
-
-.category-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.cat-label { width: 120px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-.cat-bar-bg { flex: 1; height: 10px; background-color: var(--bg-main); border-radius: 5px; }
-.cat-bar-fill { height: 100%; border-radius: 5px; background-color: var(--danger); transition: width 0.4s; }
-.cat-amount { width: 90px; text-align: right; font-size: 14px; }
-
-.alert-box { padding: 16px; border-radius: 8px; margin-bottom: 16px; display: flex; gap: 12px; align-items: center; font-size: 14px; animation: slideIn 0.3s ease; }
-.alert-warning { background-color: rgba(245, 197, 67, 0.1); color: var(--warning); border: 1px solid rgba(245, 197, 67, 0.3); }
-.alert-danger { background-color: rgba(255, 87, 86, 0.1); color: var(--danger); border: 1px solid rgba(255, 87, 86, 0.3); }
-.alert-tip { background-color: rgba(18, 214, 142, 0.1); color: var(--primary); border: 1px solid rgba(18, 214, 142, 0.3); }
-
-.transaction-list-container { max-height: 300px; overflow-y: auto; padding-right: 8px; }
-.transaction-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
-.transaction-item:last-child { border-bottom: none; }
-.transaction-icon-box { background-color: var(--bg-main); padding: 10px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-
-@media (max-width: 1024px) { .grid-layout-2 { grid-template-columns: 1fr; } }
-@media (max-width: 768px) {
-    .dashboard-container { flex-direction: column; }
-    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 16px; flex-direction: row; }
-    .main-content { padding: 20px; }
-    .btn-logout span { display: none; }
-}
-
-@keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    <script src="app.js"></script>
+</body>
+</html>
