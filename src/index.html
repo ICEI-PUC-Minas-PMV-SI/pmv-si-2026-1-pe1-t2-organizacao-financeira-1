@@ -1,112 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinApp - Organização Financeira</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <main id="auth-view" class="auth-container">
-        <div class="auth-card">
-            <div class="brand">
-                <i data-lucide="wallet" class="brand-icon"></i>
-                <h1>FinApp</h1>
-            </div>
-            <p class="caption">Controle seu patrimônio com inteligência</p>
-            
-            <form id="auth-form" onsubmit="handleAuth(event)" class="mt-4">
-                <input type="text" id="username" placeholder="Seu nome completo" class="hidden">
-                <input type="email" id="email" placeholder="seu@email.com" required>
-                <input type="password" id="password" placeholder="Sua senha secreta" required>
-                <button type="submit" class="btn-primary w-full" id="auth-btn">Entrar</button>
-            </form>
-            <button onclick="toggleAuthMode()" class="btn-text" id="toggle-auth">Ainda não tem conta? Cadastre-se</button>
+      <div class="auth-card">
+        <div class="brand">
+          <i data-lucide="wallet" class="brand-icon"></i>
+          <h1>FinApp</h1>
         </div>
+        <p class="caption">Controle seu patrimônio com inteligência</p>
+
+        <form id="auth-form" onsubmit="handleAuth(event)" class="mt-4">
+          <input
+            type="text"
+            id="username"
+            placeholder="Seu nome completo"
+            class="hidden"
+          />
+          <input type="email" id="email" placeholder="seu@email.com" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Sua senha secreta"
+            required
+          />
+          <button type="submit" class="btn-primary w-full" id="auth-btn">
+            Entrar
+          </button>
+        </form>
+        <button onclick="toggleAuthMode()" class="btn-text" id="toggle-auth">
+          Ainda não tem conta? Cadastre-se
+        </button>
+      </div>
     </main>
 
     <main id="dashboard-view" class="dashboard-container hidden">
-        <aside class="sidebar">
-            <div class="brand">
-                <i data-lucide="wallet" class="brand-icon"></i>
-                <h2>FinApp</h2>
+      <aside class="sidebar">
+        <div class="brand">
+          <i data-lucide="wallet" class="brand-icon"></i>
+          <h2>FinApp</h2>
+        </div>
+        <nav class="mt-4">
+          <a href="calculadoras.html" class="btn-nav"
+            ><i data-lucide="calculator"></i> Calculadoras
+          </a>
+          <a href="#" onclick="logout()" class="btn-logout"
+            ><i data-lucide="log-out"></i> Sair da Conta</a
+          >
+        </nav>
+      </aside>
+
+      <section class="main-content">
+        <header>
+          <div>
+            <h1 class="h2">
+              Bem-vindo,
+              <span id="user-name-display" class="text-success">Usuário</span>
+            </h1>
+            <p class="caption">Visão geral das suas finanças</p>
+          </div>
+        </header>
+
+        <div id="alerts-container" class="mt-2"></div>
+
+        <div class="grid-layout">
+          <div class="card">
+            <h3 class="h3">Minhas Finanças</h3>
+            <div class="balance-info mt-2">
+              <p class="caption">Saldo Atual</p>
+              <h2 class="h1" id="total-balance">R$ 0,00</h2>
             </div>
-            <nav class="mt-4">
-                <a href="#" onclick="logout()" class="btn-logout"><i data-lucide="log-out"></i> Sair da Conta</a>
-            </nav>
-        </aside>
-
-        <section class="main-content">
-            <header>
-                <div>
-                    <h1 class="h2">Bem-vindo, <span id="user-name-display" class="text-success">Usuário</span></h1>
-                    <p class="caption">Visão geral das suas finanças</p>
-                </div>
-            </header>
-
-            <div id="alerts-container" class="mt-2"></div>
-
-            <div class="grid-layout">
-                <div class="card">
-                    <h3 class="h3">Minhas Finanças</h3>
-                    <div class="balance-info mt-2">
-                        <p class="caption">Saldo Atual</p>
-                        <h2 class="h1" id="total-balance">R$ 0,00</h2>
-                    </div>
-                    <div class="flex-between mt-4">
-                        <div class="text-success"><i data-lucide="arrow-up-right"></i> <span id="total-income">R$ 0,00</span></div>
-                        <div class="text-error"><i data-lucide="arrow-down-right"></i> <span id="total-expense">R$ 0,00</span></div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 class="h3 flex-center-gap"><i data-lucide="target"></i> Metas do Mês</h3>
-                    <form id="goal-form" onsubmit="setGoal(event)" class="mt-2 flex-gap">
-                        <input type="number" id="monthly-goal" placeholder="Limite (R$)" required min="1">
-                        <button type="submit" class="btn-secondary">Salvar</button>
-                    </form>
-                    <div class="mt-4">
-                        <p class="caption flex-between"><span>Progresso da Meta</span> <span id="goal-percentage">0%</span></p>
-                        <div class="progress-bar mt-1">
-                            <div class="progress-fill" id="goal-fill"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 class="h3">Nova Transação</h3>
-                    <form id="transaction-form" onsubmit="addTransaction(event)" class="form-grid mt-2">
-                        <div class="flex-gap">
-                            <select id="trans-type" required onchange="updateCategoryOptions()">
-                                <option value="expense">Despesa (-)</option>
-                                <option value="income">Receita (+)</option>
-                            </select>
-                            <input type="number" id="trans-amount" placeholder="Valor (R$)" step="0.01" required min="0.01">
-                        </div>
-                        <select id="trans-category" required></select>
-                        <input type="text" id="trans-desc" placeholder="Descrição curta" required maxlength="30">
-                        <button type="submit" class="btn-primary w-full">Adicionar</button>
-                    </form>
-                </div>
+            <div class="flex-between mt-4">
+              <div class="text-success">
+                <i data-lucide="arrow-up-right"></i>
+                <span id="total-income">R$ 0,00</span>
+              </div>
+              <div class="text-error">
+                <i data-lucide="arrow-down-right"></i>
+                <span id="total-expense">R$ 0,00</span>
+              </div>
             </div>
+          </div>
 
-            <div class="grid-layout-2 mt-4">
-                <div class="card">
-                    <h3 class="h3 flex-center-gap"><i data-lucide="pie-chart"></i> Despesas por Categoria</h3>
-                    <div id="category-chart" class="mt-4"></div>
-                </div>
-
-                <div class="card">
-                    <h3 class="h3">Últimas Movimentações</h3>
-                    <div id="transactions-list" class="mt-2 transaction-list-container"></div>
-                </div>
+          <div class="card">
+            <h3 class="h3 flex-center-gap">
+              <i data-lucide="target"></i> Metas do Mês
+            </h3>
+            <form
+              id="goal-form"
+              onsubmit="setGoal(event)"
+              class="mt-2 flex-gap"
+            >
+              <input
+                type="number"
+                id="monthly-goal"
+                placeholder="Limite (R$)"
+                required
+                min="1"
+              />
+              <button type="submit" class="btn-secondary">Salvar</button>
+            </form>
+            <div class="mt-4">
+              <p class="caption flex-between">
+                <span>Progresso da Meta</span>
+                <span id="goal-percentage">0%</span>
+              </p>
+              <div class="progress-bar mt-1">
+                <div class="progress-fill" id="goal-fill"></div>
+              </div>
             </div>
-        </section>
+          </div>
+
+          <div class="card">
+            <h3 class="h3">Nova Transação</h3>
+            <form
+              id="transaction-form"
+              onsubmit="addTransaction(event)"
+              class="form-grid mt-2"
+            >
+              <div class="flex-gap">
+                <select
+                  id="trans-type"
+                  required
+                  onchange="updateCategoryOptions()"
+                >
+                  <option value="expense">Despesa (-)</option>
+                  <option value="income">Receita (+)</option>
+                </select>
+                <input
+                  type="number"
+                  id="trans-amount"
+                  placeholder="Valor (R$)"
+                  step="0.01"
+                  required
+                  min="0.01"
+                />
+              </div>
+              <select id="trans-category" required></select>
+              <input
+                type="text"
+                id="trans-desc"
+                placeholder="Descrição curta"
+                required
+                maxlength="30"
+              />
+              <button type="submit" class="btn-primary w-full">
+                Adicionar
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="grid-layout-2 mt-4">
+          <div class="card">
+            <h3 class="h3 flex-center-gap">
+              <i data-lucide="pie-chart"></i> Despesas por Categoria
+            </h3>
+            <div id="category-chart" class="mt-4"></div>
+          </div>
+
+          <div class="card">
+            <h3 class="h3">Últimas Movimentações</h3>
+            <div
+              id="transactions-list"
+              class="mt-2 transaction-list-container"
+            ></div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

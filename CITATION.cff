@@ -2,32 +2,33 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: Web Application Template
+title: Finapp - Aplicação Web de Organização Financeira Pessoal
 message: >-
   Repositório padrão para o Eixo 1 - Projeto 1: Aplicações
   Web da PUC Minas.
 type: software
 authors:
-  - given-names: Aluno 1
-    family-names: Nome Completo
-    email: aluno@pucminas.br
+  - given-names: André Luis
+    family-names: Oliveira Ferreira
+    email: andre.ferreira.572994@sga.pucminas.br
     affiliation: PUC Minas
-  - given-names: Hugo
-    name-particle: 'B '
-    family-names: de Paula
+  - given-names: Caio Milagres
+    family-names: de Oliveira
+    email: caio.milagres@sga.pucminas.br
+    affiliation: PUC Minas
     name-suffix: Prof.
-    email: hugo@pucminas.br
     affiliation: PUC Minas
-    orcid: 'https://orcid.org/0000-0002-6193-3205'
+    given-names: 
+    family-names: 
 repository-code: >-
-  https://github.com/ICEI-PUC-Minas-PMV-SI/WebApplicationProject-Template
+  https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2026-1-pe1-t2-organizacao-financeira-1/tree/main
 abstract: >-
-  Descrever resumidamente, em um ou dois parágrafos, o
-  projeto que foi desenvolvido.
+  Aplicação web para organização financeira pessoal, permitindo aos usuários gerenciar suas finanças de forma eficiente e intuitiva, além de simular cenários financeiros futuros.
 keywords:
   - Desenvolvimento Web
   - HTML
   - CSS
   - JavaScript
   - Template
-date-released: '2024-06-23'
+  - Finanças
+date-released: '2026-06-18'

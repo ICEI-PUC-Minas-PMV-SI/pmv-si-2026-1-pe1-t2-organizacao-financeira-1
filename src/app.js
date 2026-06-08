@@ -6,242 +6,284 @@ let transactions = [];
 let monthlyGoal = 0;
 
 const categoryConfig = {
-    'Moradia': { icon: 'home', type: 'expense' },
-    'Alimentação': { icon: 'coffee', type: 'expense' },
-    'Transporte': { icon: 'car', type: 'expense' },
-    'Lazer': { icon: 'gamepad-2', type: 'expense' },
-    'Saúde': { icon: 'activity', type: 'expense' },
-    'Salário': { icon: 'dollar-sign', type: 'income' },
-    'Investimentos': { icon: 'trending-up', type: 'income' },
-    'Outros': { icon: 'tag', type: 'both' }
+  Moradia: { icon: "home", type: "expense" },
+  Alimentação: { icon: "coffee", type: "expense" },
+  Transporte: { icon: "car", type: "expense" },
+  Lazer: { icon: "gamepad-2", type: "expense" },
+  Saúde: { icon: "activity", type: "expense" },
+  Salário: { icon: "dollar-sign", type: "income" },
+  Investimentos: { icon: "trending-up", type: "income" },
+  Outros: { icon: "tag", type: "both" },
 };
 
+// 🔹 Checa login ao carregar qualquer página
+document.addEventListener("DOMContentLoaded", () => {
+  const loggedEmail = localStorage.getItem("finapp_logged_user");
+  if (loggedEmail) {
+    const savedUser = JSON.parse(
+      localStorage.getItem(`finapp_user_${loggedEmail}`),
+    );
+    if (savedUser) {
+      currentUser = savedUser;
+      initDashboard();
+    }
+  }
+});
+
 function toggleAuthMode() {
-    isLoginMode = !isLoginMode;
-    document.getElementById('username').classList.toggle('hidden');
-    document.getElementById('username').required = !isLoginMode;
-    document.getElementById('auth-btn').innerText = isLoginMode ? 'Entrar no FinApp' : 'Criar minha conta';
-    document.getElementById('toggle-auth').innerText = isLoginMode ? 'Ainda não tem conta? Cadastre-se' : 'Já tem conta? Faça Login';
+  isLoginMode = !isLoginMode;
+  document.getElementById("username").classList.toggle("hidden");
+  document.getElementById("username").required = !isLoginMode;
+  document.getElementById("auth-btn").innerText = isLoginMode
+    ? "Entrar no FinApp"
+    : "Criar minha conta";
+  document.getElementById("toggle-auth").innerText = isLoginMode
+    ? "Ainda não tem conta? Cadastre-se"
+    : "Já tem conta? Faça Login";
 }
 
 function handleAuth(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    
-    if (isLoginMode) {
-        const savedUser = JSON.parse(localStorage.getItem(`finapp_user_${email}`));
-        if (savedUser && savedUser.password === document.getElementById('password').value) {
-            currentUser = savedUser;
-            initDashboard();
-        } else {
-            alert('Credenciais incorretas ou usuário não existe.');
-        }
+  e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+
+  if (isLoginMode) {
+    const savedUser = JSON.parse(localStorage.getItem(`finapp_user_${email}`));
+    if (
+      savedUser &&
+      savedUser.password === document.getElementById("password").value
+    ) {
+      currentUser = savedUser;
+      localStorage.setItem("finapp_logged_user", email); // 🔹 Marca como logado
+      initDashboard();
     } else {
-        const name = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value;
-        currentUser = { name, email, password };
-        localStorage.setItem(`finapp_user_${email}`, JSON.stringify(currentUser));
-        initDashboard();
+      alert("Credenciais incorretas ou usuário não existe.");
     }
+  } else {
+    const name = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    currentUser = { name, email, password };
+    localStorage.setItem(`finapp_user_${email}`, JSON.stringify(currentUser));
+    localStorage.setItem("finapp_logged_user", email); // 🔹 Marca como logado
+    initDashboard();
+  }
 }
 
-// CORREÇÃO: Limpeza profunda de dados no logout
 function logout() {
-    // 1. Zera o estado global
-    currentUser = null;
-    transactions = [];
-    monthlyGoal = 0;
+  currentUser = null;
+  transactions = [];
+  monthlyGoal = 0;
 
-    // 2. Alterna as telas
-    document.getElementById('dashboard-view').classList.add('hidden');
-    document.getElementById('auth-view').classList.remove('hidden');
-    
-    // 3. Limpa TODOS os formulários
-    document.getElementById('auth-form').reset();
-    document.getElementById('transaction-form').reset();
-    document.getElementById('goal-form').reset();
+  // 🔹 Remove login persistido
+  localStorage.removeItem("finapp_logged_user");
 
-    // 4. Limpa interface visual para o próximo login
-    document.getElementById('goal-fill').style.width = '0%';
-    document.getElementById('goal-percentage').innerText = '0%';
-    document.getElementById('monthly-goal').value = '';
-    document.getElementById('alerts-container').innerHTML = '';
-    document.getElementById('category-chart').innerHTML = '';
-    document.getElementById('transactions-list').innerHTML = '';
+  document.getElementById("dashboard-view").classList.add("hidden");
+  document.getElementById("auth-view").classList.remove("hidden");
+
+  document.getElementById("auth-form").reset();
+  document.getElementById("transaction-form").reset();
+  document.getElementById("goal-form").reset();
+
+  document.getElementById("goal-fill").style.width = "0%";
+  document.getElementById("goal-percentage").innerText = "0%";
+  document.getElementById("monthly-goal").value = "";
+  document.getElementById("alerts-container").innerHTML = "";
+  document.getElementById("category-chart").innerHTML = "";
+  document.getElementById("transactions-list").innerHTML = "";
 }
 
 function initDashboard() {
-    document.getElementById('auth-view').classList.add('hidden');
-    document.getElementById('dashboard-view').classList.remove('hidden');
-    
-    document.getElementById('user-name-display').innerText = currentUser.name.split(' ')[0];
-    
-    // Carrega dados APENAS do usuário logado
-    const savedData = JSON.parse(localStorage.getItem(`finapp_data_${currentUser.email}`)) || { transactions: [], goal: 0 };
-    transactions = savedData.transactions || [];
-    monthlyGoal = savedData.goal || 0;
-    
-    // Alimenta o formulário de meta com o dado do usuário (ou vazio se não tiver)
-    document.getElementById('monthly-goal').value = monthlyGoal > 0 ? monthlyGoal : '';
-    
-    updateCategoryOptions();
-    updateUI();
+  document.getElementById("auth-view").classList.add("hidden");
+  document.getElementById("dashboard-view").classList.remove("hidden");
+
+  document.getElementById("user-name-display").innerText =
+    currentUser.name.split(" ")[0];
+
+  const savedData = JSON.parse(
+    localStorage.getItem(`finapp_data_${currentUser.email}`),
+  ) || { transactions: [], goal: 0 };
+  transactions = savedData.transactions || [];
+  monthlyGoal = savedData.goal || 0;
+
+  document.getElementById("monthly-goal").value =
+    monthlyGoal > 0 ? monthlyGoal : "";
+
+  updateCategoryOptions();
+  updateUI();
 }
 
 function saveData() {
-    localStorage.setItem(`finapp_data_${currentUser.email}`, JSON.stringify({ transactions, goal: monthlyGoal }));
+  localStorage.setItem(
+    `finapp_data_${currentUser.email}`,
+    JSON.stringify({ transactions, goal: monthlyGoal }),
+  );
 }
 
 function updateCategoryOptions() {
-    const type = document.getElementById('trans-type').value;
-    const select = document.getElementById('trans-category');
-    select.innerHTML = '';
-    
-    for (const [cat, config] of Object.entries(categoryConfig)) {
-        if (config.type === type || config.type === 'both') {
-            select.innerHTML += `<option value="${cat}">${cat}</option>`;
-        }
+  const type = document.getElementById("trans-type").value;
+  const select = document.getElementById("trans-category");
+  select.innerHTML = "";
+
+  for (const [cat, config] of Object.entries(categoryConfig)) {
+    if (config.type === type || config.type === "both") {
+      select.innerHTML += `<option value="${cat}">${cat}</option>`;
     }
+  }
 }
 
 function addTransaction(e) {
-    e.preventDefault();
-    const type = document.getElementById('trans-type').value;
-    const amount = parseFloat(document.getElementById('trans-amount').value);
-    const category = document.getElementById('trans-category').value;
-    const desc = document.getElementById('trans-desc').value;
+  e.preventDefault();
+  const type = document.getElementById("trans-type").value;
+  const amount = parseFloat(document.getElementById("trans-amount").value);
+  const category = document.getElementById("trans-category").value;
+  const desc = document.getElementById("trans-desc").value;
 
-    transactions.unshift({ 
-        id: Date.now(), 
-        type, 
-        amount, 
-        category, 
-        desc, 
-        date: new Intl.DateTimeFormat('pt-BR').format(new Date()) 
-    });
-    
-    saveData();
-    document.getElementById('transaction-form').reset();
-    updateCategoryOptions(); 
-    updateUI();
+  const newTransaction = {
+    id: Date.now(),
+    type,
+    amount,
+    category,
+    desc,
+    date: new Intl.DateTimeFormat("pt-BR").format(new Date()),
+  };
+
+  transactions.unshift(newTransaction);
+  saveData();
+
+  document.getElementById("transaction-form").reset();
+  updateCategoryOptions();
+  updateUI();
 }
 
 function setGoal(e) {
-    e.preventDefault();
-    monthlyGoal = parseFloat(document.getElementById('monthly-goal').value);
-    saveData();
-    updateUI();
+  e.preventDefault();
+  monthlyGoal = parseFloat(document.getElementById("monthly-goal").value);
+  saveData();
+  updateUI();
 }
 
 function updateUI() {
-    let income = 0;
-    let expense = 0;
-    let expenseByCategory = {};
-    const listEl = document.getElementById('transactions-list');
-    listEl.innerHTML = '';
+  let income = 0;
+  let expense = 0;
+  let expenseByCategory = {};
+  const listEl = document.getElementById("transactions-list");
+  listEl.innerHTML = "";
 
-    transactions.forEach(t => {
-        if (t.type === 'income') {
-            income += t.amount;
-        } else {
-            expense += t.amount;
-            expenseByCategory[t.category] = (expenseByCategory[t.category] || 0) + t.amount;
-        }
+  transactions.forEach((t) => {
+    if (t.type === "income") {
+      income += t.amount;
+    } else {
+      expense += t.amount;
+      expenseByCategory[t.category] =
+        (expenseByCategory[t.category] || 0) + t.amount;
+    }
 
-        const isIncome = t.type === 'income';
-        const colorClass = isIncome ? 'text-success' : 'text-error';
-        const operator = isIncome ? '+' : '-';
-        const iconName = categoryConfig[t.category]?.icon || 'tag';
+    const isIncome = t.type === "income";
+    const colorClass = isIncome ? "text-success" : "text-error";
+    const operator = isIncome ? "+" : "-";
+    const iconName = categoryConfig[t.category]?.icon || "tag";
 
-        listEl.innerHTML += `
-            <div class="transaction-item">
-                <div class="flex-center-gap">
-                    <div class="transaction-icon-box"><i data-lucide="${iconName}"></i></div>
-                    <div>
-                        <p><strong>${t.desc}</strong></p>
-                        <p class="caption">${t.category} • ${t.date}</p>
-                    </div>
-                </div>
-                <div class="${colorClass} font-bold">
-                    ${operator} R$ ${t.amount.toFixed(2)}
-                </div>
-            </div>
-        `;
-    });
+    listEl.innerHTML += `
+      <div class="transaction-item">
+        <div class="flex-center-gap">
+          <div class="transaction-icon-box"><i data-lucide="${iconName}"></i></div>
+          <div>
+            <p><strong>${t.desc}</strong></p>
+            <p class="caption">${t.category} • ${t.date}</p>
+          </div>
+        </div>
+        <div class="${colorClass} font-bold">
+          ${operator} R$ ${t.amount.toFixed(2)}
+        </div>
+      </div>
+    `;
+  });
 
-    if(transactions.length === 0) listEl.innerHTML = '<p class="caption">Nenhuma transação ainda.</p>';
+  if (transactions.length === 0)
+    listEl.innerHTML = '<p class="caption">Nenhuma transação ainda.</p>';
 
-    const balance = income - expense;
+  const balance = income - expense;
 
-    document.getElementById('total-balance').innerText = `R$ ${balance.toFixed(2)}`;
-    document.getElementById('total-income').innerText = `R$ ${income.toFixed(2)}`;
-    document.getElementById('total-expense').innerText = `R$ ${expense.toFixed(2)}`;
+  document.getElementById("total-balance").innerText =
+    `R$ ${balance.toFixed(2)}`;
+  document.getElementById("total-income").innerText = `R$ ${income.toFixed(2)}`;
+  document.getElementById("total-expense").innerText =
+    `R$ ${expense.toFixed(2)}`;
 
-    renderAlerts(balance, expense);
-    renderCategoryChart(expenseByCategory, expense);
-    
-    lucide.createIcons();
+  renderAlerts(balance, expense, income);
+  renderCategoryChart(expenseByCategory, expense);
+
+  lucide.createIcons();
 }
 
-function renderAlerts(balance, expense) {
-    const alertsContainer = document.getElementById('alerts-container');
-    alertsContainer.innerHTML = '';
+function renderAlerts(balance, expense, income) {
+  const alertsContainer = document.getElementById("alerts-container");
+  alertsContainer.innerHTML = "";
 
-    if (monthlyGoal > 0) {
-        const percent = (expense / monthlyGoal) * 100;
-        document.getElementById('goal-percentage').innerText = `${Math.min(percent, 100).toFixed(1)}%`;
-        
-        const fillEl = document.getElementById('goal-fill');
-        fillEl.style.width = `${Math.min(percent, 100)}%`;
-        
-        if (percent >= 100) {
-            fillEl.style.backgroundColor = 'var(--danger)';
-            alertsContainer.innerHTML += `<div class="alert-box alert-danger"><i data-lucide="alert-triangle"></i> <strong>Atenção!</strong> Você ultrapassou 100% da sua meta de gastos deste mês.</div>`;
-        } else if (percent >= 80) {
-            fillEl.style.backgroundColor = 'var(--warning)';
-            alertsContainer.innerHTML += `<div class="alert-box alert-warning"><i data-lucide="alert-circle"></i> <strong>Cuidado:</strong> Você já consumiu ${percent.toFixed(1)}% do seu limite mensal.</div>`;
-        } else {
-            fillEl.style.backgroundColor = 'var(--primary)';
-        }
+  if (monthlyGoal > 0) {
+    const percent = (expense / monthlyGoal) * 100;
+    document.getElementById("goal-percentage").innerText =
+      `${Math.min(percent, 100).toFixed(1)}%`;
+
+    const fillEl = document.getElementById("goal-fill");
+    fillEl.style.width = `${Math.min(percent, 100)}%`;
+
+    if (percent >= 100) {
+      fillEl.style.backgroundColor = "var(--danger)";
+      alertsContainer.innerHTML += `<div class="alert-box alert-danger"><i data-lucide="alert-triangle"></i> <strong>Atenção!</strong> Você ultrapassou 100% da sua meta de gastos deste mês.</div>`;
+    } else if (percent >= 80) {
+      fillEl.style.backgroundColor = "var(--warning)";
+      alertsContainer.innerHTML += `<div class="alert-box alert-warning"><i data-lucide="alert-circle"></i> <strong>Cuidado:</strong> Você já consumiu ${percent.toFixed(1)}% do seu limite mensal.</div>`;
     } else {
-        // Se não tiver meta, zera a visualização
-        document.getElementById('goal-percentage').innerText = '0%';
-        document.getElementById('goal-fill').style.width = '0%';
+      fillEl.style.backgroundColor = "var(--primary)";
     }
+  } else {
+    document.getElementById("goal-percentage").innerText = "0%";
+    document.getElementById("goal-fill").style.width = "0%";
+  }
 
-    if (balance > 0 && income > 0) {
-        const savedPercent = (balance / income) * 100;
-        if (savedPercent >= 20) {
-            alertsContainer.innerHTML += `<div class="alert-box alert-tip"><i data-lucide="trending-up"></i> <strong>Excelente!</strong> Você poupou ${savedPercent.toFixed(1)}% da sua renda. Que tal investir esse valor?</div>`;
-        }
-    } else if (balance < 0) {
-         alertsContainer.innerHTML += `<div class="alert-box alert-danger"><i data-lucide="trending-down"></i> <strong>Dica:</strong> Seu saldo está negativo. Tente revisar a aba de "Despesas por Categoria" para cortar gastos não essenciais.</div>`;
+  if (balance > 0 && income > 0) {
+    const savedPercent = (balance / income) * 100;
+    if (savedPercent >= 20) {
+      alertsContainer.innerHTML += `<div class="alert-box alert-tip"><i data-lucide="trending-up"></i> <strong>Excelente!</strong> Você poupou ${savedPercent.toFixed(1)}% da sua renda. Que tal investir esse valor?</div>`;
     }
+  } else if (balance < 0) {
+    alertsContainer.innerHTML += `<div class="alert-box alert-danger"><i data-lucide="trending-down"></i> <strong>Dica:</strong> Seu saldo está negativo. Tente revisar a aba de "Despesas por Categoria" para cortar gastos não essenciais.</div>`;
+  }
 }
 
 function renderCategoryChart(expenseByCategory, totalExpense) {
-    const chartContainer = document.getElementById('category-chart');
-    if (totalExpense === 0) {
-        chartContainer.innerHTML = '<p class="caption text-center">Nenhuma despesa registrada para gerar gráficos.</p>';
-        return;
-    }
+  const chartContainer = document.getElementById("category-chart");
+  if (totalExpense === 0) {
+    chartContainer.innerHTML =
+      '<p class="caption text-center">Nenhuma despesa registrada para gerar gráficos.</p>';
+    return;
+  }
 
-    chartContainer.innerHTML = '';
-    
-    const sortedCategories = Object.entries(expenseByCategory).sort((a, b) => b[1] - a[1]);
+  chartContainer.innerHTML = "";
 
-    sortedCategories.forEach(([cat, amount]) => {
-        const percentage = (amount / totalExpense) * 100;
-        const iconName = categoryConfig[cat]?.icon || 'tag';
-        
-        chartContainer.innerHTML += `
-            <div class="category-bar-row">
-                <div class="cat-label caption"><i data-lucide="${iconName}" style="width: 16px; height: 16px;"></i> ${cat}</div>
-                <div class="cat-bar-bg">
-                    <div class="cat-bar-fill" style="width: ${percentage}%;"></div>
-                </div>
-                <div class="cat-amount text-error">R$ ${amount.toFixed(2)}</div>
-            </div>
-        `;
-    });
+  const sortedCategories = Object.entries(expenseByCategory).sort(
+    (a, b) => b[1] - a[1],
+  );
+
+  let chartHTML = "";
+
+  sortedCategories.forEach(([cat, amount]) => {
+    const percentage = (amount / totalExpense) * 100;
+    const iconName = categoryConfig[cat]?.icon || "tag";
+
+    chartHTML += `
+      <div class="category-bar-row">
+        <div class="cat-label caption">
+          <i data-lucide="${iconName}" style="width: 16px; height: 16px;"></i> ${cat}
+        </div>
+        <div class="cat-bar-bg">
+          <div class="cat-bar-fill" style="width: ${percentage}%;"></div>
+        </div>
+        <div class="cat-amount text-error">R$ ${amount.toFixed(2)}</div>
+      </div>
+    `;
+  });
+
+  chartContainer.innerHTML = chartHTML;
+  lucide.createIcons();
 }

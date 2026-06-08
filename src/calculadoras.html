@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinApp - Organização Financeira</title>
+    <link rel="stylesheet" href="style.css" />    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <main id="auth-view" class="auth-container">
+      <div class="auth-card">
+        <div class="brand">
+          <i data-lucide="wallet" class="brand-icon"></i>
+          <h1>FinApp</h1>
+        </div>
+        <p class="caption">Controle seu patrimônio com inteligência</p>
+
+        <form id="auth-form" onsubmit="handleAuth(event)" class="mt-4">
+          <input
+            type="text"
+            id="username"
+            placeholder="Seu nome completo"
+            class="hidden"
+          />
+          <input type="email" id="email" placeholder="seu@email.com" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Sua senha secreta"
+            required
+          />
+          <button type="submit" class="btn-primary w-full" id="auth-btn">
+            Entrar
+          </button>
+        </form>
+        <button onclick="toggleAuthMode()" class="btn-text" id="toggle-auth">
+          Ainda não tem conta? Cadastre-se
+        </button>
+      </div>
+    </main>
+
+    <main id="dashboard-view" class="dashboard-container hidden">
+      <aside class="sidebar">
+        <div class="brand">
+          <i data-lucide="wallet" class="brand-icon"></i>
+          <h2>FinApp</h2>
+        </div>
+        <nav class="mt-4">
+          <a href="index.html" class="btn-nav"
+            ><i data-lucide="layout-dashboard"></i>
+            Dashboard
+          </a>
+          <a href="#" onclick="logout()" class="btn-logout"
+            ><i data-lucide="log-out"></i> Sair da Conta</a
+          >
+        </nav>
+      </aside>
+
+      <section class="main-content">
+        <header>
+          <nav class="nav-calculadoras">
+            <ul class="menu-itens">
+              <li onclick="mostrarSection('reserva')">Reserva de Emergência</li>
+              <li onclick="mostrarSection('juros-compostos')">Renda Fixa</li>
+            </ul>
+          </nav>
+        </header>
+
+        <section id="select-none" class="container-padrao">
+        <h2>Selecione uma calculadora</h2>
+        <p>
+          Escolha uma das opções no menu para acessar as calculadoras
+          financeiras disponíveis. Cada calculadora é projetada para ajudar você
+          a tomar decisões financeiras informadas e planejar seu futuro
+          financeiro de maneira eficaz.
+        </p>
+      </section>
+
+      <section id="reserva" class="container-reserva" style="display: none">
+        <h2>Calculadora de Reserva de Emergência</h2>
+        <p>
+          A reserva de emergência é um fundo financeiro destinado a cobrir
+          despesas inesperadas ou emergências, como perda de emprego, problemas
+          de saúde ou reparos urgentes. Ela serve como uma rede de segurança
+          financeira, proporcionando estabilidade e tranquilidade em momentos
+          difíceis.
+        </p>
+
+        <div id="resultadoReserva">
+          <div class="resultado-bloco">
+            <h3>Reserva Ideal</h3>
+            <p id="valorReserva"></p>
+          </div>
+          <div class="resultado-bloco">
+            <h3>Investimento Mensal</h3>
+            <p id="valorInvestimento"></p>
+          </div>
+          <div class="resultado-bloco">
+            <h3>Tempo Estimado</h3>
+            <p id="tempoEstimado"></p>
+          </div>
+        </div>
+
+        <button class="inserir-valores" onclick="abrirModal()">
+          Inserir Valores
+        </button>
+
+        <div id="modalGastos" class="modal-reserva">
+          <div class="modal-reserva-content">
+            <span class="close-reserva" onclick="fecharModal()">&times;</span>
+            <h2>Inserir Valores dos Gastos Essenciais</h2>
+            <form id="formGastos">
+              <label class="label-investimento">Investimento Mensal:</label>
+              <input
+                type="number"
+                name="investimento"
+                class="input-investimento"
+                placeholder="Quanto você pode investir por mês"
+              />
+
+              <label>Moradia:</label>
+              <input type="number" placeholder="Aluguel, condomínio, IPTU..." />
+
+              <label>Contas básicas:</label>
+              <input
+                type="number"
+                placeholder="Água, energia, gás, internet..."
+              />
+
+              <label>Alimentação:</label>
+              <input
+                type="number"
+                placeholder="Supermercado, gás de cozinha..."
+              />
+
+              <label>Saúde:</label>
+              <input
+                type="number"
+                placeholder="Medicamentos, plano de saúde..."
+              />
+
+              <label>Transporte:</label>
+              <input
+                type="number"
+                placeholder="Combustível, transporte público..."
+              />
+
+              <label>Educação:</label>
+              <input
+                type="number"
+                placeholder="Mensalidades escolares/universitárias..."
+              />
+
+              <label>Higiene e limpeza:</label>
+              <input
+                type="number"
+                placeholder="Produtos básicos de cuidados..."
+              />
+
+              <button type="submit" class="btn-submit">Salvar</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="juros-compostos"
+        class="container-juros"
+        style="display: none"
+      >
+        <h2>Simulador de Investimento</h2>
+        <form id="formInvestimento">
+          <label>Investimento inicial:</label>
+          <input type="number" name="inicial" placeholder="R$ 0,00" />
+
+          <label>Investimento mensal:</label>
+          <input type="number" name="mensal" placeholder="R$ 0,00" />
+
+          <label>Tipo de investimento:</label>
+          <div class="radio-group">
+            <label
+              ><input type="radio" name="tipo" value="cdb" checked />
+              CDB/LC/Debêntures/Títulos públicos</label
+            >
+            <label
+              ><input type="radio" name="tipo" value="lci" /> LCI/LCA</label
+            >
+            <label
+              ><input type="radio" name="tipo" value="tesouro" /> Tesouro</label
+            >
+          </div>
+
+          <label>Indexação:</label>
+          <div class="radio-group">
+            <label
+              ><input type="radio" name="indexacao" value="pre" checked /> PRÉ
+              fixado</label
+            >
+            <label
+              ><input type="radio" name="indexacao" value="pos" /> PÓS
+              fixado</label
+            >
+            <label
+              ><input type="radio" name="indexacao" value="ipca" /> IPCA</label
+            >
+          </div>
+
+          <label>Prazo:</label>
+          <div class="input-group">
+            <input
+              type="number"
+              name="prazo"
+              id="prazoInput"
+              placeholder="Digite o prazo"
+            />
+            <div class="dropdown">
+              <button type="button" class="dropdown-btn dropdown-prazo-btn">
+                Meses
+              </button>
+              <div class="dropdown-content">
+                <div data-value="anos">Anos</div>
+                <div data-value="meses">Meses</div>
+              </div>
+            </div>
+          </div>
+
+          <label>Rentabilidade:</label>
+          <div class="input-group">
+            <input
+              type="number"
+              name="rentabilidade"
+              id="rentabilidadeInput"
+              placeholder="Digite a taxa"
+            />
+            <div class="dropdown dropdown-rentabilidade">
+              <button
+                type="button"
+                class="dropdown-btn dropdown-rentabilidade-btn"
+              >
+                Mensal
+              </button>
+              <div class="dropdown-content">
+                <div data-value="anual">Anual</div>
+                <div data-value="mensal">Mensal</div>
+              </div>
+            </div>
+
+            <!-- Texto fixo para CDI -->
+            <span
+              id="cdiInfo"
+              style="display: none; color: var(--primary); font-weight: 600"
+              >% do CDI</span
+            >
+          </div>
+
+          <button type="submit" class="btn-submit">Calcular</button>
+        </form>
+
+        <div
+          id="resultadoInvestimento"
+          style="display: none"
+          class="resultado-container"
+        >
+          <h3>Resultado da Simulação</h3>
+          <div class="resultado-grid">
+            <div class="resultado-item">
+              <span class="label">Saldo Bruto</span>
+              <span id="valorBruto"></span>
+            </div>
+            <div class="resultado-item">
+              <span class="label">Saldo Líquido</span>
+              <span id="valorLiquido"></span>
+            </div>
+            <div class="resultado-item">
+              <span class="label">Valor Investido</span>
+              <span id="valorInvestido"></span>
+            </div>
+            <div class="resultado-item">
+              <span class="label">Juros Recebidos</span>
+              <span id="jurosRecebidos"></span>
+            </div>
+            <div class="resultado-item">
+              <span class="label">Impostos</span>
+              <span id="impostos"></span>
+            </div>
+            <button id="btnRecalcular" class="btn-submit">Calcular novamente</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="tabelaInvestimento" style="display: none" class="tabela-container">
+      <h3>Evolução mês a mês</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Mês</th>
+            <th>Juros</th>
+            <th>Total Investido</th>
+            <th>Total Juros</th>
+            <th>Total Acumulado</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaBody"></tbody>
+      </table>
+    </div>
+
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="calc.js"></script>
+  </body>
+</html>
