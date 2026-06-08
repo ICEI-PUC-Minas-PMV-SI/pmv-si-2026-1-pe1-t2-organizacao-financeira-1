@@ -4,7 +4,7 @@ let isLoginMode = true;
 let currentUser = null;
 let transactions = [];
 let monthlyGoal = 0;
-let editingTransactionId = null; // 🔹 Novo estado para saber se estamos editando
+let editingTransactionId = null;
 
 const categoryConfig = {
   Moradia: { icon: "home", type: "expense" },
@@ -79,7 +79,6 @@ function logout() {
   document.getElementById("dashboard-view").classList.add("hidden");
   document.getElementById("auth-view").classList.remove("hidden");
 
-  // Travas de segurança para evitar erros na página de calculadoras
   const authForm = document.getElementById("auth-form");
   if(authForm) authForm.reset();
   
@@ -130,7 +129,6 @@ function updateCategoryOptions() {
   const typeSelect = document.getElementById("trans-type");
   const categorySelect = document.getElementById("trans-category");
   
-  // 🔹 Trava: Evita quebrar a página de calculadoras
   if (!typeSelect || !categorySelect) return; 
 
   const type = typeSelect.value;
@@ -143,7 +141,6 @@ function updateCategoryOptions() {
   }
 }
 
-// 🔹 Lógica Central do CRUD: Create & Update
 function addTransaction(e) {
   e.preventDefault();
   const type = document.getElementById("trans-type").value;
@@ -152,14 +149,12 @@ function addTransaction(e) {
   const desc = document.getElementById("trans-desc").value;
 
   if (editingTransactionId) {
-    // Modo Edição (Update)
     const index = transactions.findIndex(t => t.id === editingTransactionId);
     if(index !== -1) {
       transactions[index] = { ...transactions[index], type, amount, category, desc };
     }
-    cancelEdit(); // Limpa estado após salvar
+    cancelEdit(); 
   } else {
-    // Modo Criação (Create)
     const newTransaction = {
       id: Date.now(),
       type,
@@ -177,7 +172,6 @@ function addTransaction(e) {
   updateUI();
 }
 
-// 🔹 Editar (Update)
 function editTransaction(id) {
   const t = transactions.find(t => t.id === id);
   if (!t) return;
@@ -185,13 +179,12 @@ function editTransaction(id) {
   editingTransactionId = id;
   
   document.getElementById("trans-type").value = t.type;
-  updateCategoryOptions(); // Atualiza as opções do select com base no tipo
+  updateCategoryOptions(); 
   
   document.getElementById("trans-amount").value = t.amount;
   document.getElementById("trans-category").value = t.category;
   document.getElementById("trans-desc").value = t.desc;
 
-  // Altera os botões do formulário
   document.getElementById("submit-btn").innerText = "Atualizar";
   document.getElementById("cancel-edit-btn").classList.remove("hidden");
 }
@@ -204,7 +197,6 @@ function cancelEdit() {
   document.getElementById("cancel-edit-btn").classList.add("hidden");
 }
 
-// 🔹 Excluir (Delete)
 function deleteTransaction(id) {
   if (confirm("Tem certeza que deseja excluir esta transação?")) {
     transactions = transactions.filter(t => t.id !== id);
@@ -223,7 +215,6 @@ function setGoal(e) {
 function updateUI() {
   const listEl = document.getElementById("transactions-list");
   
-  // 🔹 Trava: Se estiver na página de calculadoras, só roda os ícones
   if (!listEl) {
     lucide.createIcons();
     return;
@@ -337,9 +328,11 @@ function renderCategoryChart(expenseByCategory, totalExpense) {
 
   let chartHTML = "";
 
+  const baseValue = (monthlyGoal > 0) ? monthlyGoal : totalExpense;
+
   sortedCategories.forEach(([cat, amount]) => {
-    const baseValue = (monthlyGoal > 0) ? monthlyGoal : totalExpense;
     const percentage = (amount / baseValue) * 100;
+    const visualWidth = Math.min(percentage, 100);
     const iconName = categoryConfig[cat]?.icon || "tag";
 
     chartHTML += `
@@ -348,7 +341,7 @@ function renderCategoryChart(expenseByCategory, totalExpense) {
           <i data-lucide="${iconName}" style="width: 16px; height: 16px;"></i> ${cat}
         </div>
         <div class="cat-bar-bg">
-          <div class="cat-bar-fill" style="width: ${percentage}%;"></div>
+          <div class="cat-bar-fill" style="width: ${visualWidth}%;"></div>
         </div>
         <div class="cat-amount text-error">R$ ${amount.toFixed(2)}</div>
       </div>
