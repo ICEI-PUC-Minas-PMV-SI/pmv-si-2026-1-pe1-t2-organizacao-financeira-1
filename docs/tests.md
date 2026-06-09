@@ -28,7 +28,7 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 | **Resultado esperado** | Dados inseridos no `localStorage` e redirecionamento para o Dashboard. |
 | **Dados de entrada** | Nome: "João Silva", E-mail: "joao@email.com", Senha: "123" |
 | **Resultado obtido** | Sucesso |
-| **Vídeo Teste criando usuário** | https://github.com/user-attachments/assets/842421bb-b7bb-4534-9ef2-70a49d5fd0
+| **Vídeo Teste criando usuário** | https://github.com/user-attachments/assets/d0dd516f-8e76-464d-8968-da1b66d330fc
 
 | **Caso de Teste** | **CT02 - Fazer Login no sistema** |
 | :--------------: | :------------ |
