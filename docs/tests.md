@@ -21,13 +21,20 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 
 ## Plano de Testes de Software
 
+
+https://github.com/user-attachments/assets/96371292-25a4-4dd8-855d-2c176061860a
+
+
 | **Caso de Teste** | **CT01 - Criar conta de usuário** |
 | :--------------: | :------------ |
 | **Procedimento** | 1) Acesse o link da aplicação <br> 2) Clique em "Ainda não tem conta? Cadastre-se" <br> 3) Preencha Nome, E-mail e Senha <br> 4) Clique em "Criar minha conta". |
 | **Requisitos associados** | RF-01 |
+
+
 | **Resultado esperado** | Dados inseridos no `localStorage` e redirecionamento para o Dashboard. |
 | **Dados de entrada** | Nome: "João Silva", E-mail: "joao@email.com", Senha: "123" |
 | **Resultado obtido** | Sucesso |
+| **Vídeo Teste criando usuário** | https://github.com/user-attachments/assets/842421bb-b7bb-4534-9ef2-70a49d5fd0
 
 | **Caso de Teste** | **CT02 - Fazer Login no sistema** |
 | :--------------: | :------------ |
@@ -36,6 +43,7 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 | **Resultado esperado** | Validação das credenciais e carregamento dos dados do usuário no Dashboard. |
 | **Dados de entrada** | E-mail: "joao@email.com", Senha: "123" |
 | **Resultado obtido** | Sucesso |
+| **Vídeo Teste Login** | https://github.com/user-attachments/assets/05ad2e8c-44aa-480a-b405-8c43cc2f298b
 
 | **Caso de Teste** | **CT03 - Adicionar Despesa e atualizar Gráficos** |
 | :--------------: | :------------ |
@@ -44,6 +52,7 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 | **Resultado esperado** | Subtração do valor no saldo, inserção na lista de movimentações e atualização do gráfico de barras "Despesas por Categoria". |
 | **Dados de entrada** | Tipo: Despesa, Valor: 150, Categoria: Alimentação, Descrição: Mercado |
 | **Resultado obtido** | Sucesso |
+|**Vídeos Teste Despesa** | https://github.com/user-attachments/assets/71208f94-6677-47db-8b24-7a67f9cfe34d
 
 | **Caso de Teste** | **CT04 - Definir Meta Mensal e gerar Alerta** |
 | :--------------: | :------------ |
@@ -52,6 +61,9 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 | **Resultado esperado** | Barra de progresso em 100% (cor vermelha) e exibição do alerta de limite ultrapassado, com base na despesa do CT03. |
 | **Dados de entrada** | Limite: 100 |
 | **Resultado obtido** | Sucesso |
+| **Vídeo Teste Meta e Alerta** | https://github.com/user-attachments/assets/7a6f995a-a99f-422b-a159-6b78c0ec0641
+
+
 
 ---
 
