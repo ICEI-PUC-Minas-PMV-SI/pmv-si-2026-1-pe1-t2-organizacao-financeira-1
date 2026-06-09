@@ -21,16 +21,10 @@ Os testes abaixo verificam a implementação dos requisitos funcionais (RF) na S
 
 ## Plano de Testes de Software
 
-
-https://github.com/user-attachments/assets/96371292-25a4-4dd8-855d-2c176061860a
-
-
 | **Caso de Teste** | **CT01 - Criar conta de usuário** |
 | :--------------: | :------------ |
 | **Procedimento** | 1) Acesse o link da aplicação <br> 2) Clique em "Ainda não tem conta? Cadastre-se" <br> 3) Preencha Nome, E-mail e Senha <br> 4) Clique em "Criar minha conta". |
 | **Requisitos associados** | RF-01 |
-
-
 | **Resultado esperado** | Dados inseridos no `localStorage` e redirecionamento para o Dashboard. |
 | **Dados de entrada** | Nome: "João Silva", E-mail: "joao@email.com", Senha: "123" |
 | **Resultado obtido** | Sucesso |
