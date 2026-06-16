@@ -29,7 +29,7 @@ Entrega final — Consolidação do código, documentação e apresentação dos
 
 # Vídeo de demonstração
 
-O vídeo de demonstração apresenta o funcionamento do sistema FinApp, destacando as seguintes funcionalidades:(./sample-video.mp4)
+O vídeo de demonstração apresenta o funcionamento do sistema FinApp, destacando as seguintes funcionalidades: [Vídeo de demonstração](./sample-video.mp4)
 
 
 
