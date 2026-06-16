@@ -5,7 +5,7 @@ Faça uma apresentação de um resumo de todos o processo de desenvolvimento e n
 Liste os arquivos produzidos e postados nesta pasta, com suas localizaçãoes e descrição do conteúdo neste arquivo Readme.md.
 
 
-* [Pitch inicial](pitch.pdf) -- arquivo com os slides da apresentação inicial
+* [Pitch inicial](./pitch.pdf) -- arquivo com os slides da apresentação inicial
 * [Apresentação final](./sample-presentation.pdf) -- arquivo com os slides da apresentação final
 * [Vídeo de demonstração](./sample-video.mp4) -- arquivo com a demonstração do funcionamento do sistema
 
@@ -51,7 +51,7 @@ Este documento lista os arquivos de apresentação do projeto FinApp — Organiz
 
 # Arquivos produzidos
 
-* [Pitch inicial](pitch.pdf) -- arquivo com os slides da apresentação inicial
+* [Pitch inicial](./pitch.pdf) -- arquivo com os slides da apresentação inicial
 * [Apresentação final](./sample-presentation.pdf) -- arquivo com os slides da apresentação final
 * [Vídeo de demonstração](./sample-video.mp4) -- arquivo com a demonstração do funcionamento do sistema
 
