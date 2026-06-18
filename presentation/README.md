@@ -7,7 +7,7 @@ Este documento lista os arquivos de apresentação do projeto FinApp — Organiz
 
 * [Pitch inicial](./pitch.pdf) -- arquivo com os slides da apresentação inicial
 * [Apresentação final](./apresentação-final.pdf) -- arquivo com os slides da apresentação final
-* [Vídeo de demonstração](./sample-video.mp4) -- arquivo com a demonstração do funcionamento do sistema
+* [Vídeo de demonstração](./Video-de-demonstração.mp4) -- arquivo com a demonstração do funcionamento do sistema
 
 
  # FinApp 
